@@ -9,14 +9,17 @@ function createToken() {
   })
 }
 
-//undefs divs to be filled once page loads
+//undef divs to be filled once page loads
 var subscribersContainer;
 
 // Now Sequence Begins
 Meteor.startup( () => {
+
+  //TODO:check if slots free;
+  Meteor.call('slotsFree', (err, res) => console.log(err, res) )
+
   //get any need page elements
   subscribersContainer = document.getElementById('subscribers')
-
   createToken().then(
     (tD) => {
       //extend the tok object with all the info and init session and publisher
@@ -28,15 +31,17 @@ Meteor.startup( () => {
     (tD) => {
       tD.session.publish(subscribersContainer);
     return tD
-  }).then(watchSession).then(connect)})
+    }).then(watchSession).then(connect).catch()
+})
+
+// console.log(slot);
 
 function watchSession ( tD ) {
   tD.session.on({
   // This function runs when session.connect() asynchronously completes
     sessionConnected: function(event) {
       console.log(event);
-      // Publish the publisher we initialzed earlier
-      // (this will trigger 'streamCreated' on other clients)
+      // Publish (this will trigger 'streamCreated' on other clients)
       tD.session.publish(tD.publisher);
     },
 
