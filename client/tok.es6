@@ -9,40 +9,48 @@ function createToken() {
   })
 }
 
+//undefs divs to be filled once page loads
+var subscribersContainer;
 
-function addSessionStats (tokDeets) {
+// Now Sequence Begins
+Meteor.startup( () => {
+  //get any need page elements
+  subscribersContainer = document.getElementById('subscribers')
 
-  return Object.create(tokDeets, {
-    session: {value: TB.initSession(tokDeets.sessionId)},
-    // publisher : {value: TB.initPublisher(tokDeets.apiKey, 'publisher')},
-    //swapped with 'layout' hack
-    layout: {value: TB.initLayoutContainer(layoutContainer).layout},
-  })
-}
+  createToken().then(
+    (tD) => {
+      //extend the tok object with all the info and init session and publisher
+      return Object.create(tD, {
+        session: {value: TB.initSession(tD.sessionId)},
+        publisher: {value: TB.initPublisher(tD.apiKey, subscribersContainer)}
+      })
+  }).then(
+    (tD) => {
+      tD.session.publish(subscribersContainer);
+    return tD
+  }).then(watchSession).then(connect)})
 
-function watchSession ( tokDeets ) {
-  console.log(tokDeets);
-  tokDeets.session.on({
+function watchSession ( tD ) {
+  tD.session.on({
+  // This function runs when session.connect() asynchronously completes
+    sessionConnected: function(event) {
+      console.log(event);
+      // Publish the publisher we initialzed earlier
+      // (this will trigger 'streamCreated' on other clients)
+      tD.session.publish(tD.publisher);
+    },
+
+    // This function runs when another client publishes a stream (eg. session.publish())
     streamCreated: function(event) {
-      tokDeets.session.subscribe(event.stream, layoutContainer,
-                                 {insertMode: 'append'})
-      tokDeets.layout()
+      // console.log(event)
+      tD.session.subscribe(event.stream, subscribersContainer)
+                                 // {insertMode: 'append'})
     }
   })
-  return tokDeets
+  return tD
 }
 
-function connect( tokDeets ) {
-  tokDeets.session.connect(tokDeets.apiKey, tokDeets.token, (err) => {
-    tokDeets.session.publish('publisherContainer')
-    tokDeets.layout()
-  })
-  return tokDeets
+function connect( tD ) {
+  tD.session.connect(tD.apiKey, tD.token)
+  return tD
 }
-
-Meteor.startup( () => {
-  var layoutContainer = document.getElementById('layoutContainer')
-  //Tokbox Setup
-  // console.log(layoutContainer);
-  createToken().then(addSessionStats).then(watchSession).then(connect)
-})
