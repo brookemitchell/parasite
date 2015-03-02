@@ -15,9 +15,6 @@ var subscribersContainer;
 // Now Sequence Begins
 Meteor.startup( () => {
 
-  //TODO:check if slots free;
-  Meteor.call('slotsFree', (err, res) => console.log(err, res) )
-
   //get any need page elements
   subscribersContainer = document.getElementById('subscribers')
   createToken().then(
@@ -31,7 +28,9 @@ Meteor.startup( () => {
     (tD) => {
       tD.session.publish(subscribersContainer);
     return tD
-    }).then(watchSession).then(connect).catch()
+    }).then(watchSession).then(
+      tD => tD.session.connect(tD.apiKey, tD.token))
+    .catch()
 })
 
 // console.log(slot);
@@ -40,7 +39,7 @@ function watchSession ( tD ) {
   tD.session.on({
   // This function runs when session.connect() asynchronously completes
     sessionConnected: function(event) {
-      console.log(event);
+      // console.log(event);
       // Publish (this will trigger 'streamCreated' on other clients)
       tD.session.publish(tD.publisher);
     },
