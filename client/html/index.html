@@ -1,0 +1,36 @@
+  <head>
+    <title>Parasite</title>
+  </head>
+  <body>
+    <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
+    <div class="container">
+      <p> pub </p>
+    <div id="publisher"> </div>
+      <p> sub </p>
+    <div id="subscribers"> </div>
+    <h3> Boxes </h3>
+    {{> bigBox}}
+    {{> lilBoxes}}
+    </div>
+  </body>
+
+  <template name="lilBoxes">
+    <ul id="boxes">
+      {{#each boxes}}
+        {{> boxItem }}
+      {{/each}}
+    </ul>
+    <div id="use deets" >
+      <p> actives are: {{ actives }} </p>
+      <p> users are: {{ num }} </p>
+    </div>
+    <p> You spent <b>{{seconds}}</b> seconds on this page. </p>
+  </template>
+
+  <template name="boxItem">
+    <li class="lilBox {{this}}">{{this}}</li>
+  </template>
+
+  <template name="bigBox">
+    <p>host box</p>
+  </template>

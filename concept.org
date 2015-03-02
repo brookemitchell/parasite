@@ -1,0 +1,15 @@
+* Basic Idea for Parasite 1.
+
+-  Users connect to a video of the installation running (opentok video)
+- There is a big div of the video, overlayed with transparent boxes, (or underneath if media port is higher?) which light up
+- They watch as users trigger sounds on stairs (cylon js)
+- If video is associated with stair, user audio plays instead.
+
+* Plan
+  - [-] User Interface [1/3]
+    - [ ] Create Two Pages, One for local, one remote.
+    - [X] Make page which shows opentok video when user connects.
+      - Format CSS
+      - Add Users via boxes
+    - [ ] Have UI Boxes which reflect hover state or touch
+  - [ ] Robot Control
