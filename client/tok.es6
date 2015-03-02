@@ -9,18 +9,19 @@ function createToken() {
   })
 }
 
+
 function addSessionStats (tokDeets) {
+
   return Object.create(tokDeets, {
     session: {value: TB.initSession(tokDeets.sessionId)},
-    // publisher : {value: TB.initPublisher(tokDeets.apiKey, 'publisher')}
+    // publisher : {value: TB.initPublisher(tokDeets.apiKey, 'publisher')},
     //swapped with 'layout' hack
     layout: {value: TB.initLayoutContainer(layoutContainer).layout},
   })
 }
 
 function watchSession ( tokDeets ) {
-  var layoutContainer = document.getElementById('layoutContainer')
-  // console.log(layoutContainer);
+  console.log(tokDeets);
   tokDeets.session.on({
     streamCreated: function(event) {
       tokDeets.session.subscribe(event.stream, layoutContainer,
@@ -28,18 +29,20 @@ function watchSession ( tokDeets ) {
       tokDeets.layout()
     }
   })
+  return tokDeets
 }
 
 function connect( tokDeets ) {
   tokDeets.session.connect(tokDeets.apiKey, tokDeets.token, (err) => {
-    tokDeets.session.publish("publisherContainer")
+    tokDeets.session.publish('publisherContainer')
     tokDeets.layout()
   })
   return tokDeets
 }
 
 Meteor.startup( () => {
+  var layoutContainer = document.getElementById('layoutContainer')
   //Tokbox Setup
   // console.log(layoutContainer);
-  createToken().then(watchSession).then(connect)
+  createToken().then(addSessionStats).then(watchSession).then(connect)
 })
