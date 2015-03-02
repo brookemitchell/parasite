@@ -1,3 +1,16 @@
 /* CSS declarations go here */
 
+/* Full boootstrap import, lazy but fast */
 @import '.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap';
+
+div {
+    border-style: solid;
+}
+
+#layoutContainer {
+    border-style: solid;
+    width: 320px;
+    height: 240px;
+    background-color: #DDD;
+    position:relative;
+}

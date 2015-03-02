@@ -1,36 +1,50 @@
-  <head>
-    <title>Parasite</title>
-  </head>
-  <body>
-    <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
-    <div class="container">
-      <p> pub </p>
-    <div id="publisher"> </div>
-      <p> sub </p>
-    <div id="subscribers"> </div>
-    <h3> Boxes </h3>
-    {{> bigBox}}
-    {{> lilBoxes}}
-    </div>
-  </body>
+<head>
+  <title>Parasite 1</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+</head>
 
-  <template name="lilBoxes">
-    <ul id="boxes">
-      {{#each boxes}}
-        {{> boxItem }}
-      {{/each}}
-    </ul>
-    <div id="use deets" >
-      <p> actives are: {{ actives }} </p>
-      <p> users are: {{ num }} </p>
-    </div>
-    <p> You spent <b>{{seconds}}</b> seconds on this page. </p>
-  </template>
+<body>
+  <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
 
-  <template name="boxItem">
-    <li class="lilBox {{this}}">{{this}}</li>
-  </template>
+  <div id="layoutContainer">
+    {{> videos }}
+  </div>
+</body>
 
-  <template name="bigBox">
+<template name="videos">
+  {{> publisher }}
+  {{> subscribers }}
+  {{> seconds }}
+</template>
+
+<template name="publisher">
     <p>host box</p>
-  </template>
+    <div id="publisherContainer">
+    </div>
+</template>
+
+<template name="subscribers">
+  <div id="subscriberContainer">
+    <div id="subscribers">
+      {{#each boxes}}
+      {{> subItem }}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="subItem">
+  <div class="subBox {{this}}"></div>
+</template>
+
+
+<template name="seconds">
+  <p> You spent <b>{{seconds}}</b> seconds on this page. </p>
+</template>
