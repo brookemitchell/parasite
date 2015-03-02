@@ -9,7 +9,6 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
 </head>
-
 <body>
   <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
   <div id="layoutContainer">
@@ -20,7 +19,7 @@
 <template name="videos">
   {{> publisher }}
   {{> subscribers }}
-  {{> seconds }}
+  <!-- {{> seconds }} -->
 </template>
 
 <template name="publisher">
@@ -30,17 +29,17 @@
 </template>
 
 <template name="subscribers">
-  <!-- <div id="subscriberContainer"> -->
+  <p> subs box </p>
     <div id="subscribers">
-      <!-- {{#each boxes}} -->
-      <!-- {{> subItem }} -->
-      <!-- {{/each}} -->
+      {{#each boxes}}
+      {{> subItem }}
+      {{/each}}
     </div>
   <!-- </div> -->
 </template>
 
 <template name="subItem">
-  <div class="subBox {{this}}"></div>
+  <div id="subBox{{this}}"></div>
 </template>
 
 

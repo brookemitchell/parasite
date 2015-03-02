@@ -22,7 +22,7 @@ Meteor.startup( () => {
       //extend the tok object with all the info and init session and publisher
       return Object.create(tD, {
         session: {value: TB.initSession(tD.sessionId)},
-        publisher: {value: TB.initPublisher(tD.apiKey, subscribersContainer)}
+        publisher: {value: TB.initPublisher(tD.apiKey, 'subBox1')}
       })
   }).then(
     (tD) => {
