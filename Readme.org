@@ -1,0 +1,5 @@
+* Parasite One
+** The next version of [[https://github.com/brookemitchell/parasiteChat][Parasite Chat]]
+   - Tries to do things 'properly'.
+   - Uses Meteor.js to for everything to make developing it a little more fun.
+   - Tests out lots of new stuff liek es6.
