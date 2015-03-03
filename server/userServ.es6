@@ -1,5 +1,5 @@
 var FreeSlots = new Mongo.Collection('Slots')
-var slotsId = FreeSlots.insert({slots:[,,,,,,,]})
+var slotsId = FreeSlots.insert({slots:[,,,,,,]})
 //dont need no db?
 // var freeSlots = [,,,,,,,];
 // var freeSlots = [1,1,1,1,1,1,1];
@@ -19,7 +19,7 @@ Meteor.methods({
     var found = false
     var guess
     while (found === false){
-      guess = Math.floor(Math.random() * 8)
+      guess = Math.floor(Math.random() * 6)
       // console.log(guess)
       if (!arr[guess]) found = true
       }

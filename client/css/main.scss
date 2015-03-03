@@ -4,13 +4,40 @@
 @import '.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap';
 
 div {
-    border-style: solid;
+    /* border-style: solid; */
+    /* padding: 1% 0 0 15%; */
+    margin: .001% .05% .01%;
 }
 
-#layoutContainer {
-    border-style: solid;
-    width: 320px;
-    height: 240px;
-    background-color: #DDD;
-    position:relative;
+body {
+
+    /* margin: 1%; */
+
+}
+
+button {
+
+    background-color: #FFF;
+    height: 80px;
+    width: 175px;
+    /* margin: 5px ; */
+
+}
+
+button:hover {
+
+    background-color: salmon;
+}
+
+.sub {
+    /* height: 180px;
+    /* width: 100px; */
+}
+
+#publisherContainer {
+    /* border-style: solid; */
+    /* width: 320px; */
+    /* height: 240px; */
+    /* background-color: #DDD; */
+    /* position:relative; */
 }

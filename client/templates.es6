@@ -5,7 +5,7 @@ Template.seconds.helpers({
 })
 
 Template.subscribers.helpers({
-  boxes: () => [0, 1,2,3,4,5,6,7]
+  boxes: () => [0,1,2,3,4,5,6]
 })
 
 var counter = new ReactiveVar(0)
