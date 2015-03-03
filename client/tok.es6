@@ -8,7 +8,10 @@ Meteor.startup( () => {
         id: {value: res},
         session: {value: OT.initSession(tD.apiKey, tD.sessionId)}
       })
-    }).then(watchSession).then( tD => tD.session.connect(tD.token))
+    }).then( tD => {
+      tD.session.connect(tD.token)
+      return tD
+    }).then(watchSession)
   })
 })
 
@@ -17,16 +20,26 @@ function watchSession ( tD ) {
     // This function runs when another client publishes a stream (eg. session.publish())
     streamCreated: function(event) {
       //check name of stream creator
-      console.log(event.stream.name);
-      let isHost = (event.stream.name === 'host')
+      let subName = event.stream.name
+      let isHost = (subName === 'host')
+      // console.log(subName, isHost);
+      let element = document.getElementById(subName)
+      tD.session.subscribe(event.stream, element, {
+        fitMode: 'contain',
+        height: 70,
+        width: 160,
+        insertMode: 'append',
+        subscribeToAudio: isHost,
+        style: {
+          // audioLevelDisplayMode: 'on',
+          nameDisplayMode: 'off',
+          buttonDisplayMode: 'off'
+        }
 
-      let element = document.getElementById(event.stream.name)
-      tD.session.subscribe(event.stream, element, err => { })
-                                 // {insertMode: 'append'})
+      }, err => { })
     },
     //when we start a session....
     sessionConnected: function(event) {
-      // console.log(event);
       let element = document.getElementById(tD.id)
       let publisher = OT.initPublisher( element , {
         audioFallbackEnabled: true,
@@ -41,14 +54,12 @@ function watchSession ( tD ) {
           nameDisplayMode: 'off',
           buttonDisplayMode: 'off'
         }
-
       }, () => {})
       tD.session.publish(publisher, err => { })
     }
   })
   return tD
 }
-
 
 // Promiseify the createToken Request
 function createToken() {

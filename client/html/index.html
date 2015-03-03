@@ -17,12 +17,12 @@
 </body>
 
 <template name="videos">
+  {{> host }}
   {{> subscribers }}
-  {{> publisher }}
   <!-- {{> seconds }} -->
 </template>
 
-<template name="publisher">
+<template name="host">
     <p>host box</p>
     <div id="publisherContainer">
     </div>
@@ -39,7 +39,7 @@
 </template>
 
 <template name="subItem">
-  <div id="{{this}}"></div>
+  <div class="sub" id="{{this}}"></div>
 </template>
 
 
