@@ -1,3 +1,52 @@
+//undef divs to be filled once page loads
+var subscribersContainer;
+
+// var userId = getId().then
+// console.log(userId())
+
+// Now Sequence Begins
+Meteor.startup( () => {
+  // load all the correct boxes
+  //get any need page elements
+  subscribersContainer = document.getElementById('subscribers')
+
+  //nested thens, this could be better
+  //TODO: show lightbox if no sots free
+  getId().then( res => {
+    createToken().then( tD => {
+      // console.log(res);
+      // console.log(tD.id);
+      //extend the tok object with all the info and init session and publisher
+      console.log(res)
+      return Object.create(tD, {
+        id: {value: res},
+        session: {value: TB.initSession(tD.sessionId)}
+        // publisher: {value: TB.initPublisher(tD.apiKey, res)}
+      })
+    }).then(watchSession).then( tD => tD.session.connect(tD.apiKey, tD.token))
+  })
+
+})
+
+function watchSession ( tD ) {
+
+  tD.session.on({
+    // This function runs when another client publishes a stream (eg. session.publish())
+    streamCreated: function(event) {
+      // console.log(event)
+      tD.session.subscribe(event.stream, subscribersContainer)
+                                 // {insertMode: 'append'})
+    },
+    sessionConnected: function(event) {
+      console.log(tD.id)
+      var publisher = TB.initPublisher(tD.apiKey, tD.id)
+      tD.session.publish(publisher, {})
+    }
+  })
+  return tD
+}
+
+
 // Promiseify the createToken Request
 function createToken() {
   return new Promise( (resolve, reject) => {
@@ -9,49 +58,14 @@ function createToken() {
   })
 }
 
-//undef divs to be filled once page loads
-var subscribersContainer;
-
-// Now Sequence Begins
-Meteor.startup( () => {
-
-  //get any need page elements
-  subscribersContainer = document.getElementById('subscribers')
-  createToken().then(
-    (tD) => {
-      //extend the tok object with all the info and init session and publisher
-      return Object.create(tD, {
-        session: {value: TB.initSession(tD.sessionId)},
-        publisher: {value: TB.initPublisher(tD.apiKey, 'subBox1')}
-      })
-  }).then(
-    (tD) => {
-      tD.session.publish(subscribersContainer);
-    return tD
-    }).then(watchSession).then(
-      tD => tD.session.connect(tD.apiKey, tD.token))
-    .catch()
-})
-
-// console.log(slot);
-
-function watchSession ( tD ) {
-  tD.session.on({
-  // This function runs when session.connect() asynchronously completes
-    sessionConnected: function(event) {
-      // console.log(event);
-      // Publish (this will trigger 'streamCreated' on other clients)
-      tD.session.publish(tD.publisher);
-    },
-
-    // This function runs when another client publishes a stream (eg. session.publish())
-    streamCreated: function(event) {
-      // console.log(event)
-      tD.session.subscribe(event.stream, subscribersContainer)
-                                 // {insertMode: 'append'})
-    }
+function getId() {
+  return new Promise( (resolve, reject) => {
+    // the Meteor callback (must be async due to TokBox req.)
+    Meteor.call('pickEmpty', (err, res) => {
+      if (err) reject(Error(err))
+      else resolve(res)
+    })
   })
-  return tD
 }
 
 function connect( tD ) {

@@ -17,8 +17,8 @@
 </body>
 
 <template name="videos">
-  {{> publisher }}
   {{> subscribers }}
+  {{> publisher }}
   <!-- {{> seconds }} -->
 </template>
 
@@ -39,7 +39,7 @@
 </template>
 
 <template name="subItem">
-  <div id="subBox{{this}}"></div>
+  <div id="{{this}}"></div>
 </template>
 
 
