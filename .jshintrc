@@ -1,5 +1,5 @@
 {
-"predef": [ "Meteor", "OpenTokClient", "TB"]
+"predef": [ "Meteor", "OpenTokClient", "OT"]
 , "bitwise": false
 , "camelcase": false
 , "curly": false
