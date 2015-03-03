@@ -11,19 +11,18 @@ Meteor.startup( () => {
   subscribersContainer = document.getElementById('subscribers')
 
   //nested thens, this could be better
-  //TODO: show lightbox if no sots free
+  //TODO: show error & remove publish permission if no sots free
   getId().then( res => {
     createToken().then( tD => {
       // console.log(res);
       // console.log(tD.id);
       //extend the tok object with all the info and init session and publisher
-      console.log(res)
       return Object.create(tD, {
         id: {value: res},
-        session: {value: TB.initSession(tD.sessionId)}
-        // publisher: {value: TB.initPublisher(tD.apiKey, res)}
+        session: {value: OT.initSession(tD.apiKey, tD.sessionId)}
+        // publisher: {value: OT.initPublisher(tD.apiKey, res)}
       })
-    }).then(watchSession).then( tD => tD.session.connect(tD.apiKey, tD.token))
+    }).then(watchSession).then( tD => tD.session.connect(tD.token))
   })
 
 })
@@ -33,14 +32,20 @@ function watchSession ( tD ) {
   tD.session.on({
     // This function runs when another client publishes a stream (eg. session.publish())
     streamCreated: function(event) {
-      // console.log(event)
-      tD.session.subscribe(event.stream, subscribersContainer)
+      // console.log(event.name)
+      let element = document.getElementById(event.stream.name)
+      console.log(element);
+      tD.session.subscribe(event.stream, element, err => { })
                                  // {insertMode: 'append'})
     },
+    //when we start a session....
     sessionConnected: function(event) {
-      console.log(tD.id)
-      var publisher = TB.initPublisher(tD.apiKey, tD.id)
-      tD.session.publish(publisher, {})
+      // console.log(tD.id)
+      let element = document.getElementById(tD.id)
+      let publisher = OT.initPublisher( element , {
+        name: tD.id
+      }, () => {})
+      tD.session.publish(publisher, err => { })
     }
   })
   return tD
