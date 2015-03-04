@@ -1,0 +1,76 @@
+/* CSS declarations go here */
+
+/* Full boootstrap import, lazy but fast */
+@import '.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap';
+
+div {
+    /* border-style: solid; */
+    /* padding: 1% 0 0 15%; */
+    margin: 0 0 1.0% 0;
+}
+
+body {
+
+    /* margin: 1%; */
+
+}
+
+h1 {
+  font-family: "estilo-script";
+  }
+
+.container-fluid {
+}
+
+paper-button {
+    cursor: default;
+    height: 90px;
+    /* width: 180px; */
+    /* width: 100%; */
+    cursor: default;
+    /* margin: 0; */
+    /* color: darkcyan; */
+    background-color: azure;
+    overflow: hidden;
+}
+
+paper-button.hover:hover {
+    background-color: #eee;
+}
+
+#publisherContainer {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    height: 126px;
+    background-color: azure;
+}
+
+li {
+    list-style: none;
+    padding: 0 0 0 3%;
+}
+
+.OT_edge-bar-item {
+
+    display: none;
+
+}
+
+/* html, body { */
+/*   height: 100%; */
+/*   margin: 0; */
+/* } */
+
+/* .core-header { */
+/*     height: 60px; */
+/*     line-height: 60px; */
+/*     font-size: 18px; */
+/*     padding: 0 10px; */
+/*     background-color: #4F7DC9; */
+/*     color: #FFF; */
+/*     transition: height 0.2s; */
+/* } */
+
+header {
+    height: 40px;
+}
