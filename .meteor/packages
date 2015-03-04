@@ -7,12 +7,9 @@
 meteor-platform
 juliancwirko:arduino-cylon
 carlodicelico:tokbox
-ecwyne:polymer
 sharlon:6to5
 deanius:promise
 reactive-var
 reywood:bootstrap3-sass
-fourseven:scss
-ecwyne:polymer-elements
-mizzao:jquery-ui
 iron:router
+ecwyne:polymer

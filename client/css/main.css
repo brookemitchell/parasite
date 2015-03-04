@@ -24,7 +24,7 @@ h1 {
 
 }
 
-paper-button {
+button {
     cursor: default;
     height: 90px;
     /* width: 180px; */
@@ -33,9 +33,10 @@ paper-button {
     /* margin: 0; */
     /* color: darkcyan; */
     background-color: azure;
+    overflow: hidden;
 }
 
-paper-button.hover:hover {
+button.hover:hover {
     background-color: #eee;
     /* cursor: default; */
 }
