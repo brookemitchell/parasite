@@ -1,5 +1,7 @@
 <head>
-  <title>Parasite 1</title>
+  <title>Parasite</title>
+  <script src="//use.typekit.net/wvm4jkx.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
@@ -8,9 +10,9 @@
 <body>
   <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
     <nav class="navbar navbar-default navbar-static-top">
-        <li> <h2>Parasite</h2> </li>
+        <li> <h1 >Parasite</h1> </li>
     </nav>
-  <div class="container-fluid schema">
+  <div class="container-fluid">
     {{> videos }}
   </div>
 </body>
@@ -21,7 +23,8 @@
 </template>
 
 <template name="host">
-    <div class="row" id="publisherContainer">
+  <div class="row">
+    <paper-shadow id="publisherContainer"  z="1" class="span-shadow col-xs-offset-1 col-xs-10"></paper-shadow>
     </div>
 </template>
 

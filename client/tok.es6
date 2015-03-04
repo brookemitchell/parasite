@@ -22,7 +22,6 @@ function watchSession ( tD ) {
       //check name of stream creator
       let subName = event.stream.name
       let isHost = (subName === 'host')
-      // console.log(subName, isHost);
       let element = document.getElementById(subName)
       tD.session.subscribe(event.stream, element, {
         fitMode: 'contain',
@@ -31,7 +30,6 @@ function watchSession ( tD ) {
         insertMode: 'append',
         subscribeToAudio: isHost,
         style: {
-          // audioLevelDisplayMode: 'on',
           nameDisplayMode: 'off',
           buttonDisplayMode: 'off'
         }
@@ -50,14 +48,12 @@ function watchSession ( tD ) {
         frameRate: 15,
         resolution: '320x240',
         style: {
-          // audioLevelDisplayMode: 'on',
           nameDisplayMode: 'off',
           buttonDisplayMode: 'off'
         }
       }, () => {
 
         var allEdges = [].slice.call(document.getElementsByClassName("OT_edge-bar-item"))
-        console.log(allEdges)
         allEdges.forEach( elem => elem.setAttribute("hidden", ""))
       })
       tD.session.publish(publisher, err => { })

@@ -15,3 +15,4 @@ reywood:bootstrap3-sass
 fourseven:scss
 ecwyne:polymer-elements
 mizzao:jquery-ui
+iron:router

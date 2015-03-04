@@ -15,6 +15,15 @@ body {
 
 }
 
+h1 {
+  font-family: "estilo-script";
+  }
+
+.container-fluid {
+
+
+}
+
 paper-button {
     cursor: default;
     height: 90px;
@@ -37,17 +46,15 @@ paper-button.hover:hover {
 }
 
 #publisherContainer {
-    /* border-style: solid; */
-    /* width: 320px; */
-    /* height: 240px; */
-    /* background-color: #DDD; */
-    /* position:relative; */
+    margin-top: -10px;
+    margin-bottom: 10px;
+    height: 126px;
+    background-color: azure;
 }
 
 li {
-
-    list-style-image: none;
-
+    list-style: none;
+    padding: 0 0 0 3%;
 }
 
 .OT_edge-bar-item {
