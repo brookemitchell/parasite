@@ -3,3 +3,6 @@
    - Tries to do things 'properly'.
    - Uses Meteor.js to for everything to make developing it a little more fun.
    - Tests out lots of new stuff liek es6.
+
+** To start:
+clone package. run: meteor
