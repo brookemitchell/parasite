@@ -1,0 +1,71 @@
+<head>
+  <title>Parasite</title>
+  <script src="//use.typekit.net/wvm4jkx.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+
+</head>
+<body>
+  <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
+    <nav class="navbar navbar-default navbar-static-top">
+        <li> <h1 >Parasite</h1> </li>
+    </nav>
+  <div class="container-fluid">
+    {{> videos }}
+  </div>
+</body>
+
+<template name="videos">
+  {{> host }}
+  {{> subscribers }}
+</template>
+
+<template name="host">
+  <div class="row">
+    <paper-shadow id="publisherContainer"  z="1" class="span-shadow col-xs-offset-1 col-xs-10"></paper-shadow>
+    </div>
+</template>
+
+<template name="subscribers">
+  <div class="row">
+    <div class="sub col-xs-offset-1 col-xs-4">
+      <paper-button raised noink class="sub hover" id="0"></paper-button>
+    </div>
+    <div class="sub col-xs-offset-1 col-xs-1 col-xs-3">
+      <paper-button raised noink class="sub hover" id="1"></paper-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="sub col-xs-offset-2 col-xs-3">
+      <paper-button raised noink class="sub hover" id="2"></paper-button>
+    </div>
+    <div class="sub col-xs-5">
+      <paper-button raised noink class="sub hover" id="3"></paper-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="sub col-xs-offset-1 col-xs-2">
+      <paper-button raised noink class="sub hover" id="4"></paper-button>
+    </div>
+    <div class="sub col-xs-offset-1 col-xs-1">
+      <paper-button raised noink class="sub hover" id="5"></paper-button>
+    </div>
+    <div class="sub col-xs-offset-2 col-xs-4">
+      <paper-button raised noink class="sub hover" id="6"></paper-button>
+    </div>
+  </div>
+</template>
+
+<template name="subItem">
+  <!-- <div class="sub col-xs-6 col-sm-3 col-md-2"> -->
+  <div class="sub col-xs-offset-3  col-xs-3">
+  <paper-button raised noink class="sub hover " id="{{this}}"></paper-button>
+  </div>
+</template>
+
+
+<template name="seconds">
+  <p> You spent <b>{{seconds}}</b> seconds on this page. </p>
+</template>
