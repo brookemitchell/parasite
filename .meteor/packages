@@ -5,11 +5,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
-juliancwirko:arduino-cylon
+autopublish
+insecure
 carlodicelico:tokbox
 sharlon:6to5
-deanius:promise
-reactive-var
-reywood:bootstrap3-sass
 iron:router
-ecwyne:polymer
+ecwyne:polymer-elements
+twbs:bootstrap
