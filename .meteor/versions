@@ -12,6 +12,7 @@ ddp@1.0.14
 deanius:promise@1.0.2
 deps@1.0.6
 ecwyne:polymer@1.0.3
+ecwyne:polymer-elements@1.0.4
 ejson@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3

@@ -6,7 +6,7 @@
 div {
     /* border-style: solid; */
     /* padding: 1% 0 0 15%; */
-    margin: .001% .05% .01%;
+    margin: 0 0 1.0% 0;
 }
 
 body {
@@ -15,18 +15,20 @@ body {
 
 }
 
-button {
-
-    background-color: #FFF;
-    height: 80px;
-    width: 175px;
-    /* margin: 5px ; */
-
+paper-button {
+    cursor: default;
+    height: 90px;
+    /* width: 180px; */
+    width: 100%;
+    cursor: default;
+    /* margin: 0; */
+    /* color: darkcyan; */
+    background-color: azure;
 }
 
-button:hover {
-
-    background-color: salmon;
+paper-button.hover:hover {
+    background-color: #eee;
+    /* cursor: default; */
 }
 
 .sub {
