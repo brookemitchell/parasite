@@ -1,0 +1,15 @@
+.vidBox, #serverVidBox {
+  position: relative;
+  background: azure;
+  width: 38%;
+  height: 198px;
+  overflow: hidden;
+  border-style: solid;
+ border-width: .1em;
+ left: .85%;
+   bottom: 3%;
+  }
+
+video {
+  position: center;
+}

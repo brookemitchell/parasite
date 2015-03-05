@@ -1,18 +1,14 @@
 /* CSS declarations go here */
 
-/* Full boootstrap import, lazy but fast */
 @import '.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap';
 
 div {
     /* border-style: solid; */
     /* padding: 1% 0 0 15%; */
-    margin: 0 0 1.0% 0;
+    margin: 0 0 1% 0;
 }
 
 body {
-
-    /* margin: 1%; */
-
 }
 
 h1 {
@@ -20,7 +16,14 @@ h1 {
   font-family: "estilo-script";
   }
 
-.container-fluid {
+#host {
+    /* overflow: hidden; */
+    /* width: 100%; */
+    margin-top: -10px;
+    margin-bottom: 10px;
+    height: 200px;
+    background: azure;
+    width: 351px;
 }
 
 paper-button {
@@ -35,15 +38,9 @@ paper-button {
     /* overflow: hidden; */
 }
 
+
 paper-button:hover {
     background-color: #eee;
-}
-
-#publisherContainer {
-    margin-top: -10px;
-    margin-bottom: 10px;
-    height: 126px;
-    background-color: azure;
 }
 
 li {
@@ -52,11 +49,12 @@ li {
 }
 
 .OT_edge-bar-item {
-
     display: none;
-
 }
 
+#host .OT_subscriber {
+    margin: 10px 0 0 0 !important;
+}
 
 /* .nabar { */
 /*     /\* height: 60px; *\/ */

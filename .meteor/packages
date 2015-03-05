@@ -12,3 +12,4 @@ sharlon:6to5
 iron:router
 ecwyne:polymer-elements
 twbs:bootstrap
+meteorhacks:ssr
