@@ -16,6 +16,7 @@ var user = [,,,,,,]
 var session = OT.initSession(apiKey, sessionId)
 // Initialize a Publisher, place it into the element with id="publisher"
 // var publisher = OT.initPublisher('host', { name: 'host' })
+console.log(session);
 
 // Attach event handlers
 session.on({
@@ -43,10 +44,12 @@ session.on({
     // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
     // the element with id="subscribers"
     var userNum = Number(event.stream.name)
+    console.log('user joined: ', userNum);
     var subContainer = document.getElementById(userNum)
-    console.log(subContainer)
+    // console.log(subContainer)
     // Subscribe to the stream that caused this event, put it inside the container we just made
-    user[userNum] = (session.subscribe(event.stream, subContainer), function( err ) {
+    user[userNum] = session.subscribe(event.stream, subContainer, function( err ) {
+      // console.log(user[userNum])
       user[userNum].setAudioVolume(0)
     })
   }

@@ -10,10 +10,15 @@ Meteor.startup( () => {
       })
     }).then( tD => {
       tD.session.connect(tD.token)
+      session = tD.session
       return tD
     }).then(watchSession)
   })
 })
+
+var serverAddress
+var session
+
 
 function watchSession ( tD ) {
   tD.session.on({
@@ -23,8 +28,8 @@ function watchSession ( tD ) {
       let subName = event.stream.name
       let isHost = (subName === 'host')
       let element = document.getElementById(subName)
-      console.log(element);
-      tD.session.subscribe(event.stream, element, {
+      // console.log(element);
+      serverAddress = tD.session.subscribe(event.stream, element, {
         fitMode: 'contain',
         height: isHost ? 180 : 70,
         width: isHost ? 320 : 160,
@@ -35,7 +40,13 @@ function watchSession ( tD ) {
           buttonDisplayMode: 'off'
         }
 
-      }, err => { })
+      }, err => {
+        if (err) console.log("couldn\'t join: ", event)
+        console.log(event.stream.id);
+        serverAddress = event.stream.id
+        if (isHost) return event.stream.id
+      })
+      console.log(serverAddress);
     },
     //when we start a session....
     sessionConnected: function(event) {
@@ -66,6 +77,8 @@ function watchSession ( tD ) {
 function createToken() {
   return new Promise( (resolve, reject) => {
     Meteor.call('createToken', (err, tokDetails) => {
+      // session = tokDetails.session
+      // console.log(session);
       if (err) reject(Error(err))
       else resolve(tokDetails)
     })
@@ -85,3 +98,19 @@ function connect( tD ) {
   tD.session.connect(tD.apiKey, tD.token)
   return tD
 }
+
+Template.subscribers.events({
+  'click .sub, focus .sub, mouseenter .sub': event => {
+
+    session.signal({
+      type: 'foo',
+      data: 'hello'
+    }, function(error) {
+      if (error) {
+        console.log("signal error: " + error.message);
+      } else {
+
+      }
+    })
+  }
+})
