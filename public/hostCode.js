@@ -72,8 +72,25 @@ session.on({
 // Connect to the Session using the 'apiKey' of the application and a 'token' for permission
 session.connect(token)
 
-session.on("signal", function(event) {
-  console.log("Signal sent from connection: " + event.from.id);
-  console.log("Signal type: " + event.type);
-  console.log("Signal data: " + event.data);
+var stateArray = [0,0,0,0,0,0,0]
+
+session.on('signal', function(event) {
+  // console.log('Signal sent from connection: ' + event.from.id);
+  // console.log('Signal type: ' + event.type);
+  // console.log('Signal data: ' + event.data);
+  checkForRemoteClicks(event)
+
 })
+
+function checkForRemoteClicks(event) {
+
+  if (event.type === 'up') {
+    if ( ++stateArray[Number(event.data)] === 1 )
+      console.log('Turn on the Audio/Lights!');
+  }
+
+  if (event.type === 'down') {
+    if ( ++stateArray[Number(event.data)] === 0 )
+      console.log('Turn off the Audio/Lights!');
+  }
+}
