@@ -26,15 +26,15 @@ paper-button {
     cursor: default;
     height: 90px;
     /* width: 180px; */
-    /* width: 100%; */
+    width: 100%;
     cursor: default;
     /* margin: 0; */
-    /* color: darkcyan; */
-    background-color: azure;
-    overflow: hidden;
+    background: azure;
+    /* background-color: azure; */
+    /* overflow: hidden; */
 }
 
-paper-button.hover:hover {
+paper-button:hover {
     background-color: #eee;
 }
 
@@ -56,21 +56,13 @@ li {
 
 }
 
-/* html, body { */
-/*   height: 100%; */
-/*   margin: 0; */
-/* } */
 
-/* .core-header { */
-/*     height: 60px; */
-/*     line-height: 60px; */
+/* .nabar { */
+/*     /\* height: 60px; *\/ */
+/*     /\* line-height: 60px; *\/ */
 /*     font-size: 18px; */
 /*     padding: 0 10px; */
 /*     background-color: #4F7DC9; */
 /*     color: #FFF; */
 /*     transition: height 0.2s; */
 /* } */
-
-header {
-    height: 40px;
-}
