@@ -21,7 +21,7 @@ h1 {
     /* width: 100%; */
     margin-top: -10px;
     margin-bottom: 10px;
-    height: 200px;
+    height: 206px;
     background: azure;
     width: 351px;
 }
@@ -53,7 +53,7 @@ li {
 }
 
 #host .OT_subscriber {
-    margin: 10px 0 0 0 !important;
+    margin: 11px 0 0 0 !important;
 }
 
 /* .nabar { */

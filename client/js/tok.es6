@@ -16,8 +16,9 @@ Meteor.startup( () => {
   })
 })
 
-var serverAddress
+// var serverAddress
 var session
+var hostCheckedIn = false
 
 
 function watchSession ( tD ) {
@@ -29,7 +30,7 @@ function watchSession ( tD ) {
       let isHost = (subName === 'host')
       let element = document.getElementById(subName)
       // console.log(element);
-      serverAddress = tD.session.subscribe(event.stream, element, {
+      tD.session.subscribe(event.stream, element, {
         fitMode: 'contain',
         height: isHost ? 180 : 70,
         width: isHost ? 320 : 160,
@@ -42,11 +43,11 @@ function watchSession ( tD ) {
 
       }, err => {
         if (err) console.log("couldn\'t join: ", event)
-        console.log(event.stream.id);
-        serverAddress = event.stream.id
+        // console.log(event.stream.id);
+        // serverAddress = event.stream.id
         if (isHost) return event.stream.id
       })
-      console.log(serverAddress);
+      // console.log(serverAddress);
     },
     //when we start a session....
     sessionConnected: function(event) {
@@ -68,6 +69,11 @@ function watchSession ( tD ) {
         allEdges.forEach( elem => elem.setAttribute("hidden", ""))
       })
       tD.session.publish(publisher, err => { })
+    },
+    'signal':  function(event) {
+      // console.log('Signal sent from connection: ' + event.from.id)
+      if (event.type === 'hostId' ) host = event.from.id
+      console.log('Signal data: ' + event.data)
     }
   })
   return tD
@@ -100,17 +106,24 @@ function connect( tD ) {
 }
 
 Template.subscribers.events({
-  'click .sub, focus .sub, mouseenter .sub': event => {
+  'mousedown .sub ': (event) => {
+    sendMouseMess('down', event.currentTarget.id)
+  },
 
-    session.signal({
-      type: 'foo',
-      data: 'hello'
-    }, function(error) {
-      if (error) {
-        console.log("signal error: " + error.message);
-      } else {
-
-      }
-    })
+  'mouseup .sub ': (event) => {
+    sendMouseMess('up', event.currentTarget.id)
   }
 })
+
+function sendMouseMess (state, mess) {
+  if(host){
+      session.signal({
+        type: state,
+        data: mess
+      }, function(error) {
+        if (error) {
+          console.log('signal error: ' + error.message);
+        }
+      })
+  }
+}

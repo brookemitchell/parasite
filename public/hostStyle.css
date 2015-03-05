@@ -1,15 +1,30 @@
 .vidBox, #serverVidBox {
-  position: relative;
+  /* position: relative; */
   background: azure;
-  width: 38%;
+  /* width: 99%; */
   height: 198px;
   overflow: hidden;
   border-style: solid;
- border-width: .1em;
- left: .85%;
-   bottom: 3%;
+  border-width: .1em;
+  margin-left: 2%;
+  /* left: .85%; */
+  /*  bottom: 3%; */
   }
 
 video {
   position: center;
+}
+
+
+.column-left{
+    float: left;
+    width: 33%;
+}
+.column-right{
+    float: left;
+    width: 33%;
+}
+.column-centre{
+    display: inline-block;
+    width: 33%;
 }

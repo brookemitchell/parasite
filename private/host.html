@@ -1,22 +1,23 @@
 <head>
   <link rel="stylesheet" href="hostStyle.css">
 </head>
-<h1>host</h1>
 <body>
 <section class="videos">
-    <div class="serverVideoBox vidBox">
-      <div id="host"></div>
-    </div>
-    <div class="userVideoBox">
+  <div class="column-left">
       <div id="0" class="vidBox"></div>
       <div id="1" class="vidBox"></div>
       <div id="2" class="vidBox"></div>
+  </div>
+  <div class="column-centre">
       <div id="3" class="vidBox"></div>
       <div id="4" class="vidBox"></div>
       <div id="5" class="vidBox"></div>
+  </div>
+    <div class="column-right">
       <div id="6" class="vidBox"></div>
+      <div id="host" class="vidBox"></div>
     </div>
-  </section>
+</section>
   <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
 <script>
   var token = '{{Token}}'
