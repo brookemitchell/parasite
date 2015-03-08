@@ -1,7 +1,6 @@
 Meteor.startup( () => {
-  //nested thens, this could be better
-  //TODO: show error & remove publish permission if no sots free
   getId().then( res => {
+    console.log(res);
     createToken().then( tD => {
       //extend the tok object with all the info and init session and publisher
       return Object.create(tD, {
@@ -16,10 +15,7 @@ Meteor.startup( () => {
   })
 })
 
-// var serverAddress
 var session
-var hostCheckedIn = false
-
 
 function watchSession ( tD ) {
   tD.session.on({
@@ -29,7 +25,8 @@ function watchSession ( tD ) {
       let subName = event.stream.name
       let isHost = (subName === 'host')
       let element = document.getElementById(subName)
-      // console.log(element);
+      console.log('subtoaudio: ', isHost)
+      console.log(event.stream)
       tD.session.subscribe(event.stream, element, {
         fitMode: 'contain',
         height: isHost ? 180 : 70,
@@ -40,12 +37,11 @@ function watchSession ( tD ) {
           nameDisplayMode: 'off',
           buttonDisplayMode: 'off'
         }
-
       }, err => {
+        removeButtons()
         if (err) console.log("couldn\'t join: ", event)
-        // console.log(event.stream.id);
-        // serverAddress = event.stream.id
         if (isHost) return event.stream.id
+        console.log(event)
       })
       // console.log(serverAddress);
     },
@@ -57,6 +53,7 @@ function watchSession ( tD ) {
         height: 70,
         width: 160,
         insertMode: 'append',
+        // publishAudio: true,
         name: tD.id,
         frameRate: 15,
         resolution: '320x240',
@@ -65,43 +62,19 @@ function watchSession ( tD ) {
           buttonDisplayMode: 'off'
         }
       }, () => {
-        var allEdges = [].slice.call(document.getElementsByClassName("OT_edge-bar-item"))
-        allEdges.forEach( elem => elem.setAttribute("hidden", ""))
+        // var allEdges = [].slice.call(document.getElementsByClassName("OT_edge-bar-item"))
+        // allEdges.forEach( elem => elem.setAttribute("hidden", ""))
       })
-      tD.session.publish(publisher, err => { })
+      tD.session.publish(publisher, err => {
+        removeButtons()
+      })
     },
     'signal':  function(event) {
       // console.log('Signal sent from connection: ' + event.from.id)
       if (event.type === 'hostId' ) host = event.from.id
-      console.log('Signal data: ' + event.data)
+      // console.log('Signal data: ' + event.data)
     }
   })
-  return tD
-}
-
-// Promiseify the createToken Request
-function createToken() {
-  return new Promise( (resolve, reject) => {
-    Meteor.call('createToken', (err, tokDetails) => {
-      // session = tokDetails.session
-      // console.log(session);
-      if (err) reject(Error(err))
-      else resolve(tokDetails)
-    })
-  })
-}
-
-function getId() {
-  return new Promise( (resolve, reject) => {
-    Meteor.call('pickEmpty', (err, res) => {
-      if (err) reject(Error(err))
-      else resolve(res)
-    })
-  })
-}
-
-function connect( tD ) {
-  tD.session.connect(tD.apiKey, tD.token)
   return tD
 }
 
@@ -115,8 +88,28 @@ Template.subscribers.events({
   }
 })
 
+// Promiseify the createToken Request
+function createToken () {
+  return new Promise( (resolve, reject) => {
+    Meteor.call('createToken', (err, tokDetails) => {
+      // session = tokDetails.session
+      // console.log(session);
+      if (err) reject(Error(err))
+      else resolve(tokDetails)
+    })
+  })
+}
+
+function getId () {
+  return new Promise( (resolve, reject) => {
+    Meteor.call('pickEmpty', (err, res) => {
+      if (err) reject(Error(err))
+      else resolve(res)
+    })
+  })
+}
+
 function sendMouseMess (state, mess) {
-  if(host){
       session.signal({
         type: state,
         data: mess
@@ -125,5 +118,9 @@ function sendMouseMess (state, mess) {
           console.log('signal error: ' + error.message);
         }
       })
-  }
+}
+
+function removeButtons () {
+        var allEdges = [].slice.call(document.getElementsByClassName('OT_edge-bar-item'))
+        allEdges.forEach( elem => elem.setAttribute('hidden', ''))
 }

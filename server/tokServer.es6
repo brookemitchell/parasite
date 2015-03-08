@@ -47,4 +47,5 @@ Router.route('/host-server', (req, res) => {
   // console.log(data.token)
   // let token = data.token
   res.end(SSR.render('hostPage'))
+  this.next()
 }, {where: 'server'})

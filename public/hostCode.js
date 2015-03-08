@@ -25,6 +25,7 @@ session.on({
       var element = document.getElementById('host')
       var publisher = OT.initPublisher( element , {
         audioFallbackEnabled: true,
+        publishAudio: true,
         height: 240,
         width: 320,
         insertMode: 'append',
@@ -78,19 +79,26 @@ session.on('signal', function(event) {
   // console.log('Signal sent from connection: ' + event.from.id);
   // console.log('Signal type: ' + event.type);
   // console.log('Signal data: ' + event.data);
+  // console.log(event);
   checkForRemoteClicks(event)
 
 })
 
-function checkForRemoteClicks(event) {
 
-  if (event.type === 'up') {
-    if ( ++stateArray[Number(event.data)] === 1 )
-      console.log('Turn on the Audio/Lights!');
+//need to remove users from arr on leave
+
+function checkForRemoteClicks(event) {
+  var person
+
+  if (event.type === 'signal:up') {
+    person = user[Number(event.data)]
+    // if ( ++stateArray[Number(event.data)] === 1 )
+    if (person) person.setAudioVolume(0)
   }
 
-  if (event.type === 'down') {
-    if ( ++stateArray[Number(event.data)] === 0 )
-      console.log('Turn off the Audio/Lights!');
+  if (event.type === 'signal:down') {
+    // if ( ++stateArray[Number(event.data)] === 0 )
+    person = user[Number(event.data)]
+    if (person) person.setAudioVolume(75)
   }
 }
