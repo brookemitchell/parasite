@@ -12,15 +12,6 @@ var sessionId = openTokClient.createSession({mediaMode: 'routed'}, (err, session
   return Server.insert({session: session.sessionId})
 })
 
-function createData () {
-  let token = openTokClient.generateToken(
-    sessionId,
-    {role: 'publisher',
-     expireTime:
-     Math.round(new Date().getTime() / 1000) + 2592e+3}) //30days
-    return {token: token, apiKey: apiKey, sessionId: sessionId}
-}
-
 SSR.compileTemplate('hostPage', Assets.getText('host.html'))
 
 Template.hostPage.helpers({
@@ -30,10 +21,18 @@ Template.hostPage.helpers({
 })
 
 Meteor.methods({
-   //TODO: give this custom args
   createToken: createData,
 })
 
 Router.route('/host-server', (req, res) => {
   res.end(SSR.render('hostPage'))
 }, {where: 'server'})
+
+function createData () {
+  let token = openTokClient.generateToken(
+    sessionId,
+    {role: 'publisher',
+     expireTime:
+     Math.round(new Date().getTime() / 1000) + 2592e+3}) //30days
+    return {token: token, apiKey: apiKey, sessionId: sessionId}
+}
