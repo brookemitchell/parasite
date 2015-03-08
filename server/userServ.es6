@@ -11,8 +11,6 @@ function slotsFull (arr) {
 }
 
 Meteor.methods({
-  // slotsFull:
-  // slotsFull,
   pickEmpty: () => {
     var arr = FreeSlots.findOne(slotsId).slots
     if (slotsFull( arr )) throw new Meteor.Error('No slots free')

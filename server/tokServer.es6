@@ -32,19 +32,9 @@ Template.hostPage.helpers({
 Meteor.methods({
    //TODO: give this custom args
   createToken: createData,
-  hostPage:  () => {
-    // let data = createData()
-    // let page = SSR.render('hostPage',  )
-    // console.log(page)
-    // return page
-  }
 })
 
 Router.route('/host-server', (req, res) => {
-  // var req = this.request
-  // var res = this.response
-  // let data = createData()
-  // console.log(data.token)
-  // let token = data.token
   res.end(SSR.render('hostPage'))
+  // this.next()
 }, {where: 'server'})
