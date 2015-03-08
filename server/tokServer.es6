@@ -36,5 +36,4 @@ Meteor.methods({
 
 Router.route('/host-server', (req, res) => {
   res.end(SSR.render('hostPage'))
-  // this.next()
 }, {where: 'server'})
