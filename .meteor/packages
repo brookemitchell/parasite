@@ -12,3 +12,4 @@ iron:router
 ecwyne:polymer-elements
 twbs:bootstrap
 meteorhacks:ssr
+meteorhacks:npm
