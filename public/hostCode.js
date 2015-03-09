@@ -13,6 +13,7 @@ var stateArray = [0,0,0,0,0,0,0]
 
 // console.log(token, apiKey, sessionId);
 
+var socket = io();
 // Initialize an OpenTok Session object
 var session = OT.initSession(apiKey, sessionId)
 // Initialize a Publisher, place it into the element with id="publisher"
@@ -97,8 +98,10 @@ function checkForRemoteClicks(event) {
       person.setAudioVolume(0)
     ++stateArray[Number(event.data)]
     console.log(stateArray[Number(event.data)]);
-    if ( stateArray[Number(event.data)] === 1 )
-      Meteor.call('arduinoCommand', 'TurnOn', 13)
+    if ( stateArray[Number(event.data)] === 1 ) {
+      // Meteor.call('arduinoCommand', 'TurnOn', 13)
+      socket.emit('yo', 'off')
+    }
   }
 
   if (event.type === 'signal:down') {
@@ -109,7 +112,9 @@ function checkForRemoteClicks(event) {
     ++stateArray[Number(event.data)]
     console.log(stateArray[Number(event.data)]);
 
-    if ( --stateArray[Number(event.data)] === 0 )
-      Meteor.call('arduinoCommand', 'TurnOff', 13)
+    if ( --stateArray[Number(event.data)] === 0 ){
+      // Meteor.call('arduinoCommand', 'TurnOff', 13)
+      socket.emit('yo', 'on')
+    }
   }
 }
