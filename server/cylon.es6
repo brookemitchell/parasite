@@ -1,18 +1,30 @@
-
-// Initialize the robot
 Cylon.robot({
-  // Change the port to the correct port for your Arduino.
+  name: 'testbot',
+  description: 'Description is optional...',
+
   connections: {
     arduino: { adaptor: 'firmata', port: '/dev/tty.usbmodem1411' }
   },
 
   devices: {
-    led: { driver: 'led', pin: 13 }
+    redLed: { driver: 'led', pin: 13 },
   },
 
-  work: function(my) {
-    every((1).second(), function() {
-      my.led.toggle();
-    });
+  redLed: function () {
+    this.devices.redLed.toggle();
+    return 'Cylon ' + this.name + ' toggles red led';
+  },
+
+  toggleAll: function () {
+    this.devices.redLed.toggle();
+    this.devices.yellowLed.toggle();
+    return 'Cylon ' + this.name + ' toggles red and yellow led';
+  },
+
+  commands: function () {
+    return {
+      'Toggle red Led': this.redLed
+    }
   }
+
 }).start()

@@ -6,11 +6,9 @@
 
 meteor-platform
 autopublish
-insecure
 carlodicelico:tokbox
 sharlon:6to5
 iron:router
 ecwyne:polymer-elements
 twbs:bootstrap
 meteorhacks:ssr
-juliancwirko:arduino-cylon
