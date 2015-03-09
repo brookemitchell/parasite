@@ -9,6 +9,7 @@ var tokSettings = {
   name  : 'host'
 }
 var user = [,,,,,,]
+var stateArray = [0,0,0,0,0,0,0]
 
 // console.log(token, apiKey, sessionId);
 
@@ -92,13 +93,23 @@ function checkForRemoteClicks(event) {
 
   if (event.type === 'signal:up') {
     person = user[Number(event.data)]
-    // if ( ++stateArray[Number(event.data)] === 1 )
-    if (person) person.setAudioVolume(0)
+    if (person)
+      person.setAudioVolume(0)
+    ++stateArray[Number(event.data)]
+    console.log(stateArray[Number(event.data)]);
+    if ( stateArray[Number(event.data)] === 1 )
+      Meteor.call('arduinoCommand', 'TurnOn', 13)
   }
 
   if (event.type === 'signal:down') {
-    // if ( ++stateArray[Number(event.data)] === 0 )
     person = user[Number(event.data)]
-    if (person) person.setAudioVolume(75)
+    if (person)
+      person.setAudioVolume(75)
+
+    ++stateArray[Number(event.data)]
+    console.log(stateArray[Number(event.data)]);
+
+    if ( --stateArray[Number(event.data)] === 0 )
+      Meteor.call('arduinoCommand', 'TurnOff', 13)
   }
 }

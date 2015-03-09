@@ -12,3 +12,5 @@ iron:router
 ecwyne:polymer-elements
 twbs:bootstrap
 meteorhacks:ssr
+juliancwirko:arduino-cylon
+joncursi:socket-io-client
