@@ -1,3 +1,4 @@
+/*
 Cylon.robot({
   name: 'arduino',
   description: 'Description is optional...',
@@ -93,3 +94,5 @@ Cylon.robot({
     }
   }
 }).start()
+
+  */
