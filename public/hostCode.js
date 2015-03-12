@@ -1,24 +1,14 @@
 // TokBox Settings constructor
 var tokSettings = {
-  // this.audioVolume = volume,
   insertMode : 'append',
   width : 200,
   height : 150,
-  // subscribeToAudio : true,
-  // subscribeToVideo : false,
-  name  : 'host'
+  name  : '{{host}}'
 }
+
 var user = [,,,,,,]
 var stateArray = [0,0,0,0,0,0,0]
 
-// console.log(token, apiKey, sessionId);
-
-var socket = io();
-// Initialize an OpenTok Session object
-var session = OT.initSession(apiKey, sessionId)
-// Initialize a Publisher, place it into the element with id="publisher"
-// var publisher = OT.initPublisher('host', { name: 'host' })
-// console.log(session);
 
 // Attach event handlers
 session.on({
@@ -75,13 +65,7 @@ session.on({
 // Connect to the Session using the 'apiKey' of the application and a 'token' for permission
 session.connect(token)
 
-var stateArray = [0,0,0,0,0,0,0]
-
 session.on('signal', function(event) {
-  // console.log('Signal sent from connection: ' + event.from.id);
-  // console.log('Signal type: ' + event.type);
-  // console.log('Signal data: ' + event.data);
-  // console.log(event);
   checkForRemoteClicks(event)
 
 })

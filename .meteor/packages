@@ -5,12 +5,11 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-carlodicelico:tokbox
-sharlon:6to5
-iron:router
-ecwyne:polymer-elements
-twbs:bootstrap
-meteorhacks:ssr
+insecure
 juliancwirko:arduino-cylon
-joncursi:socket-io-client
+twbs:bootstrap
+carlodicelico:tokbox
+ecwyne:polymer-elements
+grigio:babel
+iron:router
+underscore
