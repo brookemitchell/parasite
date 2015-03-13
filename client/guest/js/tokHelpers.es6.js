@@ -1,40 +1,4 @@
-//######helpers
-removeButtons = function removeButtons () {
-        var allEdges = [].slice.call(document.getElementsByClassName('OT_edge-bar-item'))
-        allEdges.forEach( elem => elem.setAttribute('hidden', ''))
-}
-
-// Template.subscribers.events({
-//   'mousedown .sub ': (event) => {
-//     sendMouseMess('down', event.currentTarget.id)
-//   },
-
-//   'mouseup .sub ': (event) => {
-//     sendMouseMess('up', event.currentTarget.id)
-//   }
-// })
-// function sendMouseMess (state, mess) {
-//       session.signal({
-//         type: state,
-//         data: mess
-//       }, function(error) {
-//         if (error) {
-//           console.log('signal error: ' + error.message);
-//         }
-//       })
-// }
-//######
-
 //####### Promises
-requestSlot = function requestSlot ( id ) {
-  return new Promise( (resolve, reject) => {
-    Meteor.call('requestSlot',  (err, slot) => {
-      if (err) reject(Error(err))
-      else resolve(slot)
-    })
-  })
-}
-
 createToken = function createToken () {
   return new Promise( (resolve, reject) => {
     Meteor.call('createToken',  (err, token) => {
@@ -63,3 +27,31 @@ initSession = function initSession ( apiKey, sessionId) {
   })
 }
 ///#######
+// function sendMouseMess (state, mess) {
+//       session.signal({
+//         type: state,
+//         data: mess
+//       }, function(error) {
+//         if (error) {
+//           console.log('signal error: ' + error.message);
+//         }
+//       })
+// }
+
+//helpers
+
+removeButtons = function removeButtons () {
+        var allEdges = [].slice.call(document.getElementsByClassName('OT_edge-bar-item'))
+        allEdges.forEach( elem => elem.setAttribute('hidden', ''))
+}
+
+
+// Template.subscribers.events({
+//   'mousedown .sub ': (event) => {
+//     sendMouseMess('down', event.currentTarget.id)
+//   },
+
+//   'mouseup .sub ': (event) => {
+//     sendMouseMess('up', event.currentTarget.id)
+//   }
+// })

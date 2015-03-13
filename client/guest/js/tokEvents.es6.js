@@ -64,7 +64,6 @@ signalResponse = function signalResponse( event ) {
     console.log('Signal data: ' + event.data)
     if (event.type === 'hostId' ) host = event.from.id
 }
-//#######
 
 function pickEmpty ( arr ) {
   var found = false

@@ -16,11 +16,9 @@ Meteor.publish('allTok', function () {
 var res = TokDetails.find().fetch()
 console.log(res)
 
-
 Meteor.methods({
   // getSessionId: () => {return sessionId},
   createToken: createToken,
-  // requestSlot:
   getTokDetails: () => {return {apiKey: apiKey, sessionId: sessionId}}
 })
 
@@ -45,3 +43,17 @@ function createToken () {
   // // console.log(TokDetails.find());
   // // console.log(sloats.filter(elem => elem != null).length);
   // // TokDetails.update({slots}, {$set: {'slots': sloats}})
+
+function pickEmpty ( arr ) {
+  var found = false
+  var guess
+  while (found === false){
+    guess = Math.floor(Math.random() * arr.length)
+    if (!arr[guess]) found = true
+  }
+  return guess
+}
+
+function slotsFull (arr) {
+    return arr.every(val => {return val})
+}
