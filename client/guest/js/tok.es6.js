@@ -1,3 +1,5 @@
+// FIX ID 0 Join!!!!!..
+
 Meteor.startup(function() {
   var session = getTokDetails().then( tDs => {
     return OT.initSession(tDs.apiKey, tDs.sessionId)
@@ -5,7 +7,6 @@ Meteor.startup(function() {
     watchEvents(sess)
     return sess
   })
-
   Promise.all([session, createToken()]).then( proms => {
     var session = proms[0]
     var token = proms[1]
@@ -16,18 +17,23 @@ Meteor.startup(function() {
 //##### Event Watcher
 function watchEvents ( session ) {
 
+  // console.log(session)
+
   streamCreatedResponse =  _.bind(streamCreatedResponse, session)
   startSessionResponse =  _.bind(startSessionResponse, session)
+  endSessionResponse =  _.bind(startSessionResponse, session)
+
+  // _.bindAll(session, streamCreatedResponse, startSessionResponse)
 
   session.on({
-    // This function runs when another client publishes a stream (eg. session.publish())
-    streamCreated: streamCreatedResponse,
     //when we connect to a session....
     sessionConnected: startSessionResponse,
+    // This function runs when another client publishes a stream (eg. session.publish())
+    streamCreated: streamCreatedResponse,
+    //and leave
+    streamDestroyed: endConnectionResponse,
     //when we get a tok message signal
     signal: signalResponse
   })
-
   return session
-
 }

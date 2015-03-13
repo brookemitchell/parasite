@@ -3,23 +3,19 @@ var secret = '330406bb207afa42e6e0f86c505ce3f0d7a575b1'
 var openTokClient = new OpenTokClient(apiKey,secret)
 
 // init
-var slots = new Array( 7 )
-slots[3] = 'fs'
-slots[5] = 'aaaaaaas'
-TokDetails.insert({'slots': slots})
-
+var slots = new Array(7)
 var sessionId = openTokClient.createSession({mediaMode: 'routed'})
-
-// (err, res) => {
-//   console.log(res);
-// })
-console.log(sessionId);
-
-TokDetails.insert({'sessionId': sessionId})
+// TokDetails.insert({sessionId: sessionId})
+TokDetails.insert({userSlots: slots,
+                  activeDivs: slots})
 
 Meteor.publish('allTok', function () {
     return TokDetails.find()
 })
+
+var res = TokDetails.find().fetch()
+console.log(res)
+
 
 Meteor.methods({
   // getSessionId: () => {return sessionId},

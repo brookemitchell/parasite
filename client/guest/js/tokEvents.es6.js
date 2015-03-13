@@ -1,5 +1,7 @@
 //####Event Responses
+//user join trigger
 streamCreatedResponse = function streamCreatedResponse (event) {
+  console.log(event.stream.name + ': joined!')
   //check name of stream creator
   var subName = event.stream.name
   var isHost = (subName === 'host')
@@ -14,27 +16,47 @@ streamCreatedResponse = function streamCreatedResponse (event) {
   })
 }
 
-startSessionResponse = function startSessionResponse (event) {
+//When our session starts trigger
+startSessionResponse = function (event) {
+  db = TokDetails.findOne({userSlots: {$exists: true}}, {fields: {userSlots:1}})
+  console.log(db)
+  slots = db.userSlots
+  id = db._id
 
-  // var id = Random.id(7)
-  // console.log(this.id)
+  if (slotsFree(slots)) {
+    elemId = pickEmpty(slots)
+    slots[elemId] = elemId
+  }
+  else throw Error('Slots Full!')
 
-  var slots = TokDetails.findOne().slots
-  if (!slotsFull(slots))
-    slots[pickEmpty(slots)] = this.id
-  else throw Meteor.Error('Slots Full!')
+  TokDetails.update(id , {$set: {userSlots: slots}})
 
-  // var work = TokDetails.findOne().slots
-  // console.log(work);
+  if (elemId){
+    var element = document.getElementById(elemId)
+    // console.log(element)
 
-  //requestSlot, see if a div/button is free
-  // requestSlot(id).then( elemIdNum => {} )
-
-    var element = document.getElementById(1)
     //elem to replace, options, callback
+    publishOptions.name = elemId
+    // console.log(publishOptions.name)
+
     var publisher = OT.initPublisher( element, publishOptions,
                                       () => removeButtons())
-    this.publish(publisher, err => {})
+  }
+  this.publish(publisher, err => {})
+}
+
+//perhaps only do this on host watcher
+endConnectionResponse = function(event) {
+  // console.log(event.stream.name +': left')
+
+  var spot = event.stream.name
+  var cursor = TokDetails.findOne({userSlots: spot})
+  // console.log(cursor)
+
+  var key = "userSlots."+spot
+  // console.log(key)
+
+  TokDetails.update(cursor._id, {$set: {[key]: 999}})
 }
 
 signalResponse = function signalResponse( event ) {
@@ -54,6 +76,6 @@ function pickEmpty ( arr ) {
   return guess
 }
 
-function slotsFull (arr) {
-    return arr.every(val => {return val})
+function slotsFree (arr) {
+    return arr.some(val => {return val == null})
 }
