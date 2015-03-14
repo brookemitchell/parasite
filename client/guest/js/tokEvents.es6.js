@@ -14,17 +14,16 @@ startSessionResponse = function (event) {
 
 //user joins, triggers...
 streamCreatedResponse = function streamCreatedResponse (event) {
-  // console.log(event.stream.name + ': joined!')
   //check name of stream creator
   var subName = event.stream.name
   var isHost = (subName === 'host')
   var element = document.getElementById(subName)
   this.subscribe(event.stream, element, subscribeOptions , err => {
-    // removeButtons()
-    // if (err) console.log("couldn\'t join: ", event)
+    removeButtons()
     // if (isHost) return event.stream.id
   })
 }
+
 //perhaps only do this on host watcher
 // endConnectionResponse = function(event) {
 //   Meteor.call('endConnection', event)

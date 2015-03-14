@@ -10,9 +10,7 @@ pickEmpty = () => {
       found = false
 
   var mInfo =  findUserSlots()
-  console.log(mInfo)
   var userSlots = mInfo.userSlots
-  console.log(userSlots)
 
   if (slotsFull(userSlots))
     throw new Meteor.error('SlotsFull!')
@@ -32,7 +30,6 @@ slotsFull = (arr) => {
 }
 
 endConnection = (elemId) => {
-  console.log('remove: ' + elemId)
   slots = "userSlots." + elemId
   TokDetails.update(findUserSlots()._id , {$set: {[slots]: null}})
 }
