@@ -18,37 +18,24 @@ streamCreatedResponse = function streamCreatedResponse (event) {
 
 //When our session starts trigger
 startSessionResponse = function (event) {
-  db = TokDetails.findOne({userSlots: {$exists: true}}, {fields: {userSlots:1}})
-  console.log(db)
-  slots = db.userSlots
-  id = db._id
-
-  if (slotsFree(slots)) {
-    elemId = pickEmpty(slots)
-    slots[elemId] = elemId
-  }
-  else throw Error('Slots Full!')
-
-  TokDetails.update(id , {$set: {userSlots: slots}})
-
-  if (elemId){
-    var element = document.getElementById(elemId)
-    // console.log(element)
-
-    //elem to replace, options, callback
-    publishOptions.name = elemId
-    // console.log(publishOptions.name)
-
+  // db = TokDetails.findOne({userSlots: {$exists: true}}, {fields: {userSlots:1}})
+  // slots = db.userSlots
+  // id = db._id
+  // TokDetails.update(id , {$set: {userSlots: slots}})
+  pickEmpty().then( slotId => {
+    publishOptions.name = slotId
+    var element = document.getElementById(slotId)
     var publisher = OT.initPublisher( element, publishOptions,
                                       () => removeButtons())
-  }
-  this.publish(publisher, err => {})
+    console.log(this)
+
+    this.publish(publisher, err => {})
+  })
 }
 
 //perhaps only do this on host watcher
 endConnectionResponse = function(event) {
   // console.log(event.stream.name +': left')
-
   var spot = event.stream.name
   var cursor = TokDetails.findOne({userSlots: spot})
   // console.log(cursor)
@@ -65,16 +52,16 @@ signalResponse = function signalResponse( event ) {
     if (event.type === 'hostId' ) host = event.from.id
 }
 
-function pickEmpty ( arr ) {
-  var found = false
-  var guess
-  while (found === false){
-    guess = Math.floor(Math.random() * arr.length)
-    if (!arr[guess]) found = true
-  }
-  return guess
-}
+// function pickEmpty ( arr ) {
+//   var found = false
+//   var guess
+//   while (found === false){
+//     guess = Math.floor(Math.random() * arr.length)
+//     if (!arr[guess]) found = true
+//   }
+//   return guess
+// }
 
-function slotsFree (arr) {
-    return arr.some(val => {return val == null})
-}
+// function slotsFree (arr) {
+//     return arr.some(val => {return val == null})
+// }

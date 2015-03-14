@@ -18,6 +18,15 @@ getTokDetails = function getTokDetails () {
   })
 }
 
+pickEmpty = function getTokDetails () {
+  return new Promise( (resolve, reject) => {
+    Meteor.call('pickEmpty', (err, slotId) => {
+      if (err) reject(Error(err))
+      else resolve(slotId)
+    })
+  })
+}
+
 initSession = function initSession ( apiKey, sessionId) {
   return new Promise( (resolve, reject) => {
     OT.initSession(apiKey, sessionId, (err, session) => {
@@ -26,6 +35,17 @@ initSession = function initSession ( apiKey, sessionId) {
     })
   })
 }
+
+// initPublisher = function initPublisher ( element, publishOptions) {
+//   return new Promise( (resolve, reject) => {
+//     OT.initPublisher(element, publishOptions, (err) => {
+//       if (err) reject(Error(err))
+//       removeButtons()
+//     })
+//   })
+// }
+
+
 ///#######
 // function sendMouseMess (state, mess) {
 //       session.signal({

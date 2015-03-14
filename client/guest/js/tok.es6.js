@@ -6,6 +6,7 @@ Meteor.startup(function() {
     watchEvents(sess)
     return sess
   })
+  // big squish
   Promise.all([session, createToken()]).then( proms => {
     var session = proms[0]
     var token = proms[1]
@@ -15,11 +16,12 @@ Meteor.startup(function() {
 
 //##### Event Watcher
 function watchEvents ( session ) {
-  // console.log(session)
+
   streamCreatedResponse =  _.bind(streamCreatedResponse, session)
   startSessionResponse =  _.bind(startSessionResponse, session)
   endSessionResponse =  _.bind(startSessionResponse, session)
   // _.bindAll(session, streamCreatedResponse, startSessionResponse)
+
   session.on({
     //when we connect to a session....
     sessionConnected: startSessionResponse,

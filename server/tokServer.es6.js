@@ -3,23 +3,23 @@ var secret = '330406bb207afa42e6e0f86c505ce3f0d7a575b1'
 var openTokClient = new OpenTokClient(apiKey,secret)
 
 // init
-var slots = new Array(7)
+var slots = new Array(7)        // dummy array to populate values
 var sessionId = openTokClient.createSession({mediaMode: 'routed'})
-// TokDetails.insert({sessionId: sessionId})
 TokDetails.insert({userSlots: slots,
-                  activeDivs: slots})
+                   activeDivs: slots})
+
 
 Meteor.publish('allTok', function () {
     return TokDetails.find()
 })
 
-var res = TokDetails.find().fetch()
-console.log(res)
-
 Meteor.methods({
-  // getSessionId: () => {return sessionId},
+
   createToken: createToken,
+  pickEmpty: pickEmpty,
+  getSessionId: () => {return sessionId},
   getTokDetails: () => {return {apiKey: apiKey, sessionId: sessionId}}
+
 })
 
 function createToken () {
@@ -29,6 +29,26 @@ function createToken () {
   // var slots = TokDetails.findOne({slots})
   // console.log(slots);
   return token
+}
+
+function pickEmpty () {
+  var guess,
+      found = false,
+      userSlots = TokDetails.findOne().userSlots
+
+  if (slotsFull(userSlots))
+    throw new Meteor.error('SlotsFull!')
+
+  while (found === false){
+    guess = Math.floor(Math.random() * 7)
+    if (!userSlots[guess])
+      found = true
+  }
+  return guess
+}
+
+function slotsFull (arr) {
+    return arr.every(val => {return val})
 }
 
   // slots.forEach( u => {
@@ -43,17 +63,3 @@ function createToken () {
   // // console.log(TokDetails.find());
   // // console.log(sloats.filter(elem => elem != null).length);
   // // TokDetails.update({slots}, {$set: {'slots': sloats}})
-
-function pickEmpty ( arr ) {
-  var found = false
-  var guess
-  while (found === false){
-    guess = Math.floor(Math.random() * arr.length)
-    if (!arr[guess]) found = true
-  }
-  return guess
-}
-
-function slotsFull (arr) {
-    return arr.every(val => {return val})
-}
