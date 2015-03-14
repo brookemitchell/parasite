@@ -34,16 +34,20 @@ function createToken () {
 function pickEmpty () {
   var guess,
       found = false,
-      userSlots = TokDetails.findOne().userSlots
+      mInfo = TokDetails.findOne(
+        {userSlots: {$exists: true}}, {fields: {userSlots:1}}),
+      userSlots = mInfo.userSlots
 
   if (slotsFull(userSlots))
     throw new Meteor.error('SlotsFull!')
 
   while (found === false){
     guess = Math.floor(Math.random() * 7)
-    if (!userSlots[guess])
+    if (userSlots[guess] === null)
       found = true
   }
+  userSlots[guess] = guess
+  TokDetails.update(mInfo._id, {$set: {userSlots: userSlots}})
   return guess
 }
 

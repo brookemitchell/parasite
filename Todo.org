@@ -1,2 +1,3 @@
 * TODO Promisify Publish methods
   SCHEDULED: <2015-03-14 Sat>
+* TODO Session Join to Div 0 isnt workign~!!!!

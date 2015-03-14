@@ -27,7 +27,7 @@ startSessionResponse = function (event) {
     var element = document.getElementById(slotId)
     var publisher = OT.initPublisher( element, publishOptions,
                                       () => removeButtons())
-    console.log(this)
+    // console.log(this)
 
     this.publish(publisher, err => {})
   })
