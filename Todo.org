@@ -1,3 +1,5 @@
 * TODO Promisify Publish methods
   SCHEDULED: <2015-03-14 Sat>
-* TODO Session Join to Div 0 isnt workign~!!!!
+* DONE Session join to Div 0 bug
+* TODO make db update only to singe arr elements (vs whole arr
+* TODO Uncaught Error: Not permitted. Untrusted code may only remove documents by ID. [403]

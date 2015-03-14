@@ -1,6 +1,19 @@
 //####Event Responses
-//user join trigger
+//When our session starts trigger
+startSessionResponse = function (event) {
+  pickEmpty().then( slotId => {
+    console.log(slotId)
+    publishOptions.name = slotId.toString()
+    var element = document.getElementById(slotId)
+    var publisher = OT.initPublisher( element, publishOptions,
+                                      () => removeButtons())
+    this.publish(publisher, err => {})
+  })
+}
+
+//user joins, triggers...
 streamCreatedResponse = function streamCreatedResponse (event) {
+  console.log(event.stream.name)
   console.log(event.stream.name + ': joined!')
   //check name of stream creator
   var subName = event.stream.name
@@ -12,38 +25,22 @@ streamCreatedResponse = function streamCreatedResponse (event) {
     // removeButtons()
     // if (err) console.log("couldn\'t join: ", event)
     // if (isHost) return event.stream.id
-    // console.log(event)
   })
 }
-
-//When our session starts trigger
-startSessionResponse = function (event) {
-  // db = TokDetails.findOne({userSlots: {$exists: true}}, {fields: {userSlots:1}})
-  // slots = db.userSlots
-  // id = db._id
-  // TokDetails.update(id , {$set: {userSlots: slots}})
-  pickEmpty().then( slotId => {
-    publishOptions.name = slotId
-    var element = document.getElementById(slotId)
-    var publisher = OT.initPublisher( element, publishOptions,
-                                      () => removeButtons())
-    // console.log(this)
-
-    this.publish(publisher, err => {})
-  })
-}
-
 //perhaps only do this on host watcher
 endConnectionResponse = function(event) {
+  console.log('conenction endsdsed')
+
+  Meteor.call('endConnection', event)
   // console.log(event.stream.name +': left')
-  var spot = event.stream.name
-  var cursor = TokDetails.findOne({userSlots: spot})
-  // console.log(cursor)
+  // var spot = event.stream.name
+  // var cursor = TokDetails.findOne({userSlots: spot})
+  // // console.log(cursor)
 
-  var key = "userSlots."+spot
-  // console.log(key)
+  // var key = "userSlots."+spot
+  // // console.log(key)
 
-  TokDetails.update(cursor._id, {$set: {[key]: 999}})
+  // TokDetails.update(cursor._id, {$set: {[key]: 999}})
 }
 
 signalResponse = function signalResponse( event ) {

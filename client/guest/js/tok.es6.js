@@ -1,4 +1,3 @@
-// FIX ID 0 Join!!!!!..
 Meteor.startup(function() {
   var session = getTokDetails().then( tDs => {
     return OT.initSession(tDs.apiKey, tDs.sessionId)
