@@ -8,13 +8,10 @@ createToken = () => {
 pickEmpty = () => {
   var guess,
       found = false
-
   var mInfo =  findUserSlots()
   var userSlots = mInfo.userSlots
-
   if (slotsFull(userSlots))
     throw new Meteor.error('SlotsFull!')
-
   while (found === false){
     guess = Math.floor(Math.random() * 7)
     if (userSlots[guess] === null)
@@ -24,7 +21,6 @@ pickEmpty = () => {
   TokDetails.update(mInfo._id, {$set: {userSlots: userSlots}})
   return guess
 }
-
 slotsFull = (arr) => {
     return arr.every(val => {return val})
 }
@@ -34,10 +30,15 @@ endConnection = (elemId) => {
   TokDetails.update(findUserSlots()._id , {$set: {[slots]: null}})
 }
 
-
 findUserSlots = () => {
-
   return TokDetails.findOne({userSlots: {$exists: true}}
                             , {fields: {userSlots:1}})
+}
 
+
+mousePress = (actionName, id) => {
+  if (actionName == 'down') var res = 1
+  else if (actionName == 'up') var res = 0
+  var spot = "activeDivs." + id
+  TokDetails.update(findUserSlots()._id , {$set: {[spot]: res}})
 }

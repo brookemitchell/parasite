@@ -64,14 +64,3 @@ removeButtons = function removeButtons () {
         var allEdges = [].slice.call(document.getElementsByClassName('OT_edge-bar-item'))
         allEdges.forEach( elem => elem.setAttribute('hidden', ''))
 }
-
-
-// Template.subscribers.events({
-//   'mousedown .sub ': (event) => {
-//     sendMouseMess('down', event.currentTarget.id)
-//   },
-
-//   'mouseup .sub ': (event) => {
-//     sendMouseMess('up', event.currentTarget.id)
-//   }
-// })

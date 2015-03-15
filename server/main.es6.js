@@ -1,8 +1,9 @@
 Meteor.methods({
 
   createToken: createToken,
-  pickEmpty: pickEmpty,
   endConnection: endConnection,
+  mousePress: mousePress,
+  pickEmpty: pickEmpty,
   getSessionId: () => {return sessionId},
   getTokDetails: () => {return {apiKey: apiKey, sessionId: sessionId}}
 

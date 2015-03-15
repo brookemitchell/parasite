@@ -3,12 +3,7 @@
 @import '.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap';
 
 div {
-    /* border-style: solid; */
-    /* padding: 1% 0 0 15%; */
     margin: 0 0 1% 0;
-}
-
-body {
 }
 
 h1 {
@@ -16,28 +11,38 @@ h1 {
     font-family: "estilo-script";
   }
 
-#host {
-    /* overflow: hidden; */
-    /* width: 100%; */
-    margin-top: -10px;
-    margin-bottom: 10px;
+.navbar {
+    margin-bottom: 1%;
+}
+
+.button-content {}
+
+.span-shadow, #host {
+    padding: 0;
     background: azure;
     height: 180px;
     width: 320px;
 }
 
+.hostRow{
+    margin-bottom: 2%;
+}
+
+paper-shadow {
+    padding: 0;
+}
+
+.col {
+    padding: 0;
+}
+
 paper-button {
     cursor: default;
     height: 90px;
-    /* width: 180px; */
     width: 100%;
     cursor: default;
-    /* margin: 0; */
-    background: azure;
-    /* background-color: azure; */
-    /* overflow: hidden; */
+    background-color: azure;
 }
-
 
 paper-button:hover {
     background-color: #eee;
@@ -53,19 +58,15 @@ li {
 }
 
 #host .OT_subscriber {
-    margin: 11px 0 0 0 !important;
+    /* margin: 11px 0 0 0 !important; */
 }
 
 .button-content {
     overflow: hidden;
 }
 
-/* .nabar { */
-/*     /\* height: 60px; *\/ */
-/*     /\* line-height: 60px; *\/ */
-/*     font-size: 18px; */
-/*     padding: 0 10px; */
-/*     background-color: #4F7DC9; */
-/*     color: #FFF; */
-/*     transition: height 0.2s; */
-/* } */
+
+.active {
+
+    background-color: rgba(182, 250, 97, 0.54);
+}

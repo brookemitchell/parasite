@@ -4,10 +4,10 @@ Session.setDefault('isHost', false)
 subscribeOptions = {
   // isHost: Session.get('isHost')
   fitMode: 'contain',
-  height: isHost ? 180 : 70,
-  // height:  70,
-  width: isHost ? 320 : 160,
-  // width: 160,
+  // height: isHost ? 180 : 70,
+  height:  70,
+  // width: isHost ? 320 : 160,
+  width: 160,
   insertMode: 'append',
   // subscribeToAudio: this.isHost || false,
   subscribeToAudio: false,
@@ -26,7 +26,7 @@ publishOptions = {
   insertMode: 'append',
   // name: 1,
   frameRate: 15,
-  resolution: isHost ?  '640x480' : '320x240',
+  resolution: '320x240',
   style: {
     nameDisplayMode: 'off',
     buttonDisplayMode: 'off'
