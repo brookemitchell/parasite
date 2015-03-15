@@ -1,11 +1,16 @@
+
+  isHost = (Session.get('isHost'))
+  console.log(isHost)
+
 Meteor.startup(function() {
+
   var session = getTokDetails().then( tDs => {
     return OT.initSession(tDs.apiKey, tDs.sessionId)
   }).then(sess => {
     watchEvents(sess)
     return sess
   })
-  // big squish
+  // compose async results
   Promise.all([session, createToken()]).then( proms => {
     var session = proms[0]
     var token = proms[1]

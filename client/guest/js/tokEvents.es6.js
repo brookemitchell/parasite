@@ -1,42 +1,46 @@
 //####Event Responses
 //When our session starts trigger
+
 startSessionResponse = function (event) {
-  pickEmpty().then( slotId => {
-    //not cool
-    globalSlotId = slotId
-    publishOptions.name = slotId.toString()
-    var element = document.getElementById(slotId)
-    var publisher = OT.initPublisher( element, publishOptions,
-                                      () => removeButtons())
-    this.publish(publisher, err => {})
-  })
+  console.log(isHost)
+  if(isHost){
+
+      globalSlotId = 'host'
+      publishOptions.name = 'host'
+    // publishOptions.height =
+      var element = document.getElementById(slotId)
+      var publisher = OT.initPublisher( element, publishOptions,
+                                        () => removeButtons())
+      this.publish(publisher, err => {})
+
+
+  }
+
+  else {
+
+    pickEmpty().then( slotId => {
+      //not cool
+      globalSlotId = slotId
+      publishOptions.name = slotId.toString()
+      var element = document.getElementById(slotId)
+      var publisher = OT.initPublisher( element, publishOptions,
+                                        () => removeButtons())
+      this.publish(publisher, err => {})
+    })
+  }
 }
 
 //user joins, triggers...
 streamCreatedResponse = function streamCreatedResponse (event) {
   //check name of stream creator
   var subName = event.stream.name
-  var isHost = (subName === 'host')
+
   var element = document.getElementById(subName)
   this.subscribe(event.stream, element, subscribeOptions , err => {
     removeButtons()
     // if (isHost) return event.stream.id
   })
 }
-
-//perhaps only do this on host watcher
-// endConnectionResponse = function(event) {
-//   Meteor.call('endConnection', event)
-//   // console.log(event.stream.name +': left')
-//   // var spot = event.stream.name
-//   // var cursor = TokDetails.findOne({userSlots: spot})
-//   // // console.log(cursor)
-
-//   // var key = "userSlots."+spot
-//   // // console.log(key)
-
-//   // TokDetails.update(cursor._id, {$set: {[key]: 999}})
-// }
 
 signalResponse = function signalResponse( event ) {
     console.log('Signal sent from connection: ' + event.from.id)

@@ -1,9 +1,14 @@
 <template name="host">
+  <head>
+    <script>
+     // hack: should do this in ironRouter
+     var isHost =  {{isHost}}
+     Session.set('isHost', isHost)
+    </script>
+  </head>
   <div>
     <ul>
-      <li>{{name}}</li>
-      <li>{{apiKey}}</li>
-      <li>{{sessionId}}</li>
+      <li>is Host?: {{isHost}}</li>
     </ul>
   </div>
 

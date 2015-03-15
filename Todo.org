@@ -1,11 +1,15 @@
-* TODO Remove lost connections from db
-* TODO make db update only to singe arr elements (vs whole arr
+* TODO [#A] Host join code.
+* TODO [#C] make db update only to singe arr elements (vs whole arr
 * TODO Promisify Publish methods
   SCHEDULED: <2015-03-14 Sat>
 * TODO Uncaught Error: Not permitted. Untrusted code may only remove documents by ID. [403]
-
+* TODO Add account ogin feature for 'host'
 * Archive                                                           :ARCHIVE:
 ** DONE Session join to Div 0 bug
    :PROPERTIES:
    :ARCHIVE_TIME: 2015-03-14 Sat 21:24
+   :END:
+** TODO Remove lost connections from db
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2015-03-15 Sun 11:27
    :END:
