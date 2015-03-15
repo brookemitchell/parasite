@@ -5,14 +5,14 @@ startSessionResponse = function (event) {
   console.log(isHost)
   if(isHost){
 
-      globalSlotId = 'host'
-      publishOptions.name = 'host'
-    // publishOptions.height =
-      var element = document.getElementById(slotId)
-      var publisher = OT.initPublisher( element, publishOptions,
-                                        () => removeButtons())
-      this.publish(publisher, err => {})
-
+      // globalSlotId = 'host'
+    publishOptions.name = 'host'
+    publishOptions.height = 180
+    publishOptions.width = 320
+    var element = document.getElementById('host')
+    var publisher = OT.initPublisher( element, publishOptions,
+                                      () => removeButtons())
+    this.publish(publisher, err => {})
 
   }
 
@@ -34,6 +34,7 @@ startSessionResponse = function (event) {
 streamCreatedResponse = function streamCreatedResponse (event) {
   //check name of stream creator
   var subName = event.stream.name
+  console.log(subName)
 
   var element = document.getElementById(subName)
   this.subscribe(event.stream, element, subscribeOptions , err => {

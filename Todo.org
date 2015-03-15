@@ -4,6 +4,7 @@
   SCHEDULED: <2015-03-14 Sat>
 * TODO Uncaught Error: Not permitted. Untrusted code may only remove documents by ID. [403]
 * TODO Add account ogin feature for 'host'
+* TODO [#B] Fit sub boxes to size
 * Archive                                                           :ARCHIVE:
 ** DONE Session join to Div 0 bug
    :PROPERTIES:

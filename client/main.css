@@ -21,9 +21,9 @@ h1 {
     /* width: 100%; */
     margin-top: -10px;
     margin-bottom: 10px;
-    height: 206px;
     background: azure;
-    width: 351px;
+    height: 180px;
+    width: 320px;
 }
 
 paper-button {
@@ -54,6 +54,10 @@ li {
 
 #host .OT_subscriber {
     margin: 11px 0 0 0 !important;
+}
+
+.button-content {
+    overflow: hidden;
 }
 
 /* .nabar { */

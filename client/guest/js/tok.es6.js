@@ -1,6 +1,5 @@
-
-  isHost = (Session.get('isHost'))
-  console.log(isHost)
+isHost = (Session.get('isHost'))
+  // console.log(isHost)
 
 Meteor.startup(function() {
 
