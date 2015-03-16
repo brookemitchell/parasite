@@ -21,20 +21,22 @@ pickEmpty = () => {
   TokDetails.update(mInfo._id, {$set: {userSlots: userSlots}})
   return guess
 }
+
 slotsFull = (arr) => {
     return arr.every(val => {return val})
 }
 
 endConnection = (elemId) => {
-  slots = "userSlots." + elemId
-  TokDetails.update(findUserSlots()._id , {$set: {[slots]: null}})
+  if (elemId !== 'host') {
+    slots = "userSlots." + elemId
+    TokDetails.update(findUserSlots()._id , {$set: {[slots]: null}})
+  }
 }
 
 findUserSlots = () => {
   return TokDetails.findOne({userSlots: {$exists: true}}
                             , {fields: {userSlots:1}})
 }
-
 
 mousePress = (actionName, id) => {
   if (actionName == 'down') var res = 1

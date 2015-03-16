@@ -35,6 +35,12 @@ initSession = function initSession ( apiKey, sessionId) {
     })
   })
 }
+//helpers
+
+removeButtons = function removeButtons () {
+        var allEdges = [].slice.call(document.getElementsByClassName('OT_edge-bar-item'))
+        allEdges.forEach( elem => elem.setAttribute('hidden', ''))
+}
 
 // initPublisher = function initPublisher ( element, publishOptions) {
 //   return new Promise( (resolve, reject) => {
@@ -45,8 +51,6 @@ initSession = function initSession ( apiKey, sessionId) {
 //   })
 // }
 
-
-///#######
 // function sendMouseMess (state, mess) {
 //       session.signal({
 //         type: state,
@@ -57,10 +61,3 @@ initSession = function initSession ( apiKey, sessionId) {
 //         }
 //       })
 // }
-
-//helpers
-
-removeButtons = function removeButtons () {
-        var allEdges = [].slice.call(document.getElementsByClassName('OT_edge-bar-item'))
-        allEdges.forEach( elem => elem.setAttribute('hidden', ''))
-}

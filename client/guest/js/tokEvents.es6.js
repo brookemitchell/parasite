@@ -1,10 +1,9 @@
 //####Event Responses
 //When our session starts trigger
-
 startSessionResponse = function (event) {
   // console.log(isHost)
   if(isHost){
-    // globalSlotId = 'host'
+    globalSlotId = 'host'
     publishOptions.name = 'host'
     publishOptions.height = 180
     publishOptions.width = 320
@@ -12,12 +11,9 @@ startSessionResponse = function (event) {
     var element = document.getElementById('host')
     var publisher = OT.initPublisher( element, publishOptions,
                                       () => removeButtons())
-    this.publish(publisher, err => {})
-
+    hostStream = this.publish(publisher, err => {})
   }
-
   else {
-
     pickEmpty().then( slotId => {
       //not cool
       globalSlotId = slotId
@@ -33,26 +29,37 @@ startSessionResponse = function (event) {
 //user joins, triggers...
 streamCreatedResponse = function streamCreatedResponse (event) {
 
-  // console.log(event.stream.name)
-  //check name of stream creator
-  var subName = event.stream.name
-  var element = document.getElementById(subName)
+  //updtate stream details
+  var latestStream = event.stream
+  var joinName = latestStream.name
+  // console.log(latestStream)
+  // console.log(isHost, joinName)
 
-  if(event.stream.name === 'host'){
-    // globalSlotId = 'host'
+  var element = document.getElementById(joinName)
+
+  if(joinName === 'host') {
     subscribeOptions.height = 180
     subscribeOptions.width = 320
-    // publishOptions.resolution = '640x480'
+    subscribeOptions.subscribeToAudio = true
+    subscribeOptions.audioVolume = 100
+  } else {
+    subscribeOptions.subscribeToAudio = false
+    subscribeOptions.audioVolume = 0
+    subscribeOptions.height = 70
+    subscribeOptions.width = 160
   }
 
-  this.subscribe(event.stream, element, subscribeOptions , err => {
-    removeButtons()
-    // if (isHost) return event.stream.id
-  })
-}
+  if(isHost) {
+    subscribeOptions.subscribeToAudio = true
+  }
 
-signalResponse = function signalResponse( event ) {
-    console.log('Signal sent from connection: ' + event.from.id)
-    console.log('Signal data: ' + event.data)
-    if (event.type === 'hostId' ) host = event.from.id
+  //now u have to remove these too
+  subItems[Number(joinName)] = this.subscribe(
+    event.stream, element, subscribeOptions , err => {
+      removeButtons()
+      if( isHost) {
+        // console.log(this)
+        subItems[Number(joinName)].setAudioVolume(0)
+      }
+    })
 }

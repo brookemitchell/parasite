@@ -1,9 +1,10 @@
+
+subItems = new Array(7)
 isHost = (Session.get('isHost'))
   // console.log(isHost)
 
 Meteor.startup(function() {
-
-  var session = getTokDetails().then( tDs => {
+  session = getTokDetails().then( tDs => {
     return OT.initSession(tDs.apiKey, tDs.sessionId)
   }).then(sess => {
     watchEvents(sess)
@@ -25,16 +26,17 @@ function watchEvents ( session ) {
   // _.bindAll(session, streamCreatedResponse, startSessionResponse)
 
   // I feel I am a mildly bad person for doing this...
-  window.onbeforeunload = () => Meteor.call('endConnection', globalSlotId)
+  if (!isHost)
+    window.onbeforeunload = () => Meteor.call('endConnection', globalSlotId)
 
 
   session.on({
     //when we connect to a session....
     sessionConnected: startSessionResponse,
     // This function runs when another client publishes a stream (eg. session.publish())
-    streamCreated: streamCreatedResponse,
+    streamCreated: streamCreatedResponse
     //when we get a tok message signal
-    signal: signalResponse
+    // signal: signalResponse
   })
   return session
 }
