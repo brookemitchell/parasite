@@ -3,10 +3,13 @@
     <script>
      // hack: should do this in ironRouter
      var isHost =  {{isHost}}
-     Session.set('isHost', isHost)
+     // Session.set('isHost', isHost)
     </script>
   </head>
   {{> guest }}
-  <script src="hostAudio.js"></script>
+  {{> hostAudio }}
 </template>
-<template name="hostAudio"><div>I'm a host</div></template>
+
+<template name="hostAudio">
+  <div>I'm a host</div>
+</template>
