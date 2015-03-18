@@ -1,10 +1,8 @@
 Template.subscribers.events({
   'mousedown .sub ': (event) => {
     // sendMouseMess('down', event.currentTarget.id)
-    // console.log('mOUSEPREss', event)
-
+    console.log('mOUSEPREss', event)
     Meteor.call('mousePress', 'down', event.currentTarget.id)
-
   },
 
   'mouseup .sub, mouseleave .sub ': (event) => {
@@ -37,6 +35,7 @@ Tracker.autorun(function () {
             if(subItems[i]){
               subItems[i].setAudioVolume(100 * elem)
             }
+            else gainNodes[i].gain.value=(0.5 * elem)
           }
         }
 
