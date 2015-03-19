@@ -8,4 +8,5 @@ sessionId = openTokClient.createSession({mediaMode: 'routed'})
 var slots = new Array(7)        // dummy array to populate values
 // var slots = [null,1,2,3,4,5,6]
 TokDetails.insert({userSlots: slots,
-                   activeDivs: slots})
+                   activeDivs: slots,
+                   divPos: slots})

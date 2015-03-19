@@ -12,7 +12,7 @@ Template.hostAudio.rendered = function() {
         sourceNodes[i] = audioCtx.createBufferSource();
 
         filterNodes[i] = audioCtx.createBiquadFilter()
-        filterNodes[i].type = "lowshelf";
+        filterNodes[i].type = "lowpass";
         filterNodes[i].frequency.value = 1000;
         filterNodes[i].gain.value = 25;
 

@@ -35,12 +35,28 @@ endConnection = (elemId) => {
 
 findUserSlots = () => {
   return TokDetails.findOne({userSlots: {$exists: true}}
-                            , {fields: {userSlots:1}})
+                            , {fields: {userSlots:1
+                                        , divPost: 1}})
 }
 
-mousePress = (actionName, id) => {
+mousePress = (actionName, id, offset) => {
+  // if (!offset) offset = [0,0]
   if (actionName == 'down') var res = 1
   else if (actionName == 'up') var res = 0
   var spot = "activeDivs." + id
-  TokDetails.update(findUserSlots()._id , {$set: {[spot]: res}})
+  var divPos = "divPos." + id
+  // console.log(findUserSlots())
+
+  if (offset)
+    TokDetails.update(findUserSlots()._id , {$set: {[spot]: res
+                                                  , [divPos]: offset}})
+  else
+    TokDetails.update(findUserSlots()._id , {$set: {[spot]: res }})
+}
+
+lightYellow = (pin, on) => {
+  if (_.isObject(Cylon)) {
+    return Cylon.robots['Light'].commands['switchStair'].call(Cylon.robots['Light'], pin, on)
+
+  }
 }
