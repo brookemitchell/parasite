@@ -13,3 +13,4 @@ ecwyne:polymer-elements
 grigio:babel
 iron:router
 underscore
+logging

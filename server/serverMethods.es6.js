@@ -46,11 +46,14 @@ findActiveDivs = () => {
 }
 
 mousePress = (actionName, id, offset, light) => {
-  var res = (actionName == 'down') ? 1 : 0
+  var res = (actionName === 'down') ? 1 : 0
   var spot = "activeDivs." + id
   var divPos = "divPos." + id
   var divs = findActiveDivs()
-  // console.log(actionName, res, id);
+
+  //### Log each press
+  if (res === 1)
+    console.log(id)
 
   if (light)
     Meteor.call('lightYellow', id, res )
