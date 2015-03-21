@@ -11,8 +11,8 @@ Meteor.startup( function() {
       , button2: { driver: 'button', pin: 2}
       , button3: { driver: 'button', pin: 3}
       , button4: { driver: 'button', pin: 4}
-      , button5: { driver: 'button', pin: 5}
-      , button6: { driver: 'button', pin: 6}
+      , button5: { driver: 'button', pin: 20}
+      , button6: { driver: 'button', pin: 21}
       , stair0: { driver: 'led', pin: 5 }
       , stair1: { driver: 'led', pin: 6 }
       , stair2: { driver: 'led', pin: 7 }
