@@ -2,13 +2,13 @@ Template.subscribers.events({
   'mousedown .sub ': (event) => {
     // sendMouseMess('down', event.currentTarget.id)
     if(event.offsetX) Meteor.call('mousePress', 'down', event.currentTarget.id
-                                  , [event.offsetX, event.offsetY])
-    else Meteor.call('mousePress', 'down', event.currentTarget.id)
+                                  , [event.offsetX, event.offsetY], 1)
+    else Meteor.call('mousePress', 'down', event.currentTarget.id, null, 1)
   },
 
   'mouseup .sub, mouseleave .sub ': (event) => {
     // sendMouseMess('up', event.currentTarget.id)
-    Meteor.call('mousePress', 'up', event.currentTarget.id)
+    Meteor.call('mousePress', 'up', event.currentTarget.id, null, 1)
   }
 })
 
@@ -35,6 +35,7 @@ Tracker.autorun(function () {
         if(isHost) {
           if(session && hostStream) {
             if (curs.divPos[i]) {
+              //magic values for filter sound
               filterNodes[i].frequency.value = curs.divPos[i][0] * 20
               filterNodes[i].Q.value = curs.divPos[i][1] / 5
             }
@@ -45,7 +46,7 @@ Tracker.autorun(function () {
             else gainNodes[i].gain.value=(0.5 * elem)
 
            //Arduino Light up call
-            Meteor.call('lightYellow', i, elem )
+            // Meteor.call('lightYellow', i, elem )
           }
         }
         //*****

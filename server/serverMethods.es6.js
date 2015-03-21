@@ -36,22 +36,31 @@ endConnection = (elemId) => {
 findUserSlots = () => {
   return TokDetails.findOne({userSlots: {$exists: true}}
                             , {fields: {userSlots:1
-                                        , divPost: 1}})
+                                        , divPos: 1}})
 }
 
-mousePress = (actionName, id, offset) => {
-  // if (!offset) offset = [0,0]
-  if (actionName == 'down') var res = 1
-  else if (actionName == 'up') var res = 0
+findActiveDivs = () => {
+  return TokDetails.findOne({activeDivs: {$exists: true}}
+                            , {fields: {activeDivs: 1
+                                        , divPos: 1}})
+}
+
+mousePress = (actionName, id, offset, light) => {
+  var res = (actionName == 'down') ? 1 : 0
+  // else if (actionName == 'up') var res = 0
   var spot = "activeDivs." + id
   var divPos = "divPos." + id
-  // console.log(findUserSlots())
+  var divs = findActiveDivs()
+  console.log(actionName, res, id);
+
+  if (light)
+    Meteor.call('lightYellow', id, res )
 
   if (offset)
-    TokDetails.update(findUserSlots()._id , {$set: {[spot]: res
-                                                  , [divPos]: offset}})
+    TokDetails.update(divs._id , {$set: {[spot]: res
+                                         , [divPos]: offset}})
   else
-    TokDetails.update(findUserSlots()._id , {$set: {[spot]: res }})
+    TokDetails.update(divs._id , {$set: {[spot]: res }})
 }
 
 lightYellow = (pin, on) => {
