@@ -36,6 +36,7 @@ Tracker.autorun(function () {
           if(session && hostStream) {
             if (curs.divPos[i]) {
               //magic values for filter sound
+              delayNodes[i].delayTime.value = curs.divPos[i][0] * 20
               filterNodes[i].frequency.value = curs.divPos[i][0] * 20
               filterNodes[i].Q.value = curs.divPos[i][1] / 5
             }

@@ -1,25 +1,33 @@
 Template.hostAudio.rendered = function() {
   if(isHost) {
-    var AudioContext = window.AudioContext || window.webkitAudioContext;
-    var audioCtx = new AudioContext();
-    var finish = audioCtx.destination;
-    sourceNodes = [,,,,,,]
+    var AudioContext = window.AudioContext || window.webkitAudioContext
+    var audioCtx = new AudioContext()
+    var finish = audioCtx.destination
+    var sourceNodes = [,,,,,,]
+    //need access over whole app
     filterNodes = [,,,,,,]
+    delayNodes = [,,,,,,]
     gainNodes = [,,,,,,]
     ;(function setUpAudioNodes () {
       for (var i = 0 ; i < 7; i++){
         //create buff sources & gain nodes
-        sourceNodes[i] = audioCtx.createBufferSource();
+        sourceNodes[i] = audioCtx.createBufferSource()
 
         filterNodes[i] = audioCtx.createBiquadFilter()
         filterNodes[i].type = "lowpass";
         filterNodes[i].frequency.value = 1000;
         filterNodes[i].gain.value = 25;
 
+        delayNodes[i] = audioCtx.createDelay(0.1)
+        delayNodes[i].delayTime.value = 0.025
+
         gainNodes[i] = audioCtx.createGain();
           // connnect to gainNode
-        sourceNodes[i].connect(filterNodes[i]);
-        filterNodes[i].connect(gainNodes[i]);
+        sourceNodes[i].connect(filterNodes[i])
+        filterNodes[i].connect(delayNodes[i])
+        filterNodes[i].connect(gainNodes[i])
+
+        delayNodes[i].connect(gainNodes[i])
         gainNodes[i].connect(finish);
         //settings
         sourceNodes[i].loop = true;
