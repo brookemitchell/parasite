@@ -48,18 +48,11 @@ Meteor.startup( function() {
       //OFF
       for( let i = 0 ; i < 7; i++ ) {
         my['button' + i].on('push', () => {
-          // if (my['button' + i].isOff){
           this.switchStairOff(i, 0)
-            // this.immedRelease(i)
-          // }
         })
         //ON
         my['button' + i].on('release', () => {
-          // if (!my['button' + i].isOn){
-            // lightYellow(i, 1)
            this.switchStairOn(i, 1)
-            // push('down', i)
-          // }
         })
       }
     }
