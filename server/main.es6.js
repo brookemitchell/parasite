@@ -2,7 +2,7 @@ Meteor.methods({
 
   createToken: createToken,
   endConnection: endConnection,
-  lightYellow: lightYellow,
+  // lightYellow: lightYellow,
   mousePress: mousePress,
   pickEmpty: pickEmpty,
   getSessionId: () => {return sessionId},

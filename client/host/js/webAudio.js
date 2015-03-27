@@ -18,13 +18,13 @@ Template.hostAudio.rendered = function() {
         filterNodes[i].frequency.value = 1000;
         filterNodes[i].gain.value = 25;
 
-        delayNodes[i] = audioCtx.createDelay(0.1)
-        delayNodes[i].delayTime.value = 0.025
+        delayNodes[i] = audioCtx.createDelay()
+        delayNodes[i].delayTime.value = 0.25
 
         gainNodes[i] = audioCtx.createGain();
           // connnect to gainNode
         sourceNodes[i].connect(filterNodes[i])
-        filterNodes[i].connect(delayNodes[i])
+        sourceNodes[i].connect(delayNodes[i])
         filterNodes[i].connect(gainNodes[i])
 
         delayNodes[i].connect(gainNodes[i])

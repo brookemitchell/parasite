@@ -53,10 +53,12 @@ mousePress = (actionName, id, offset, light) => {
 
   //### Log each press
   if (res === 1)
-    console.log(id)
+    console.log('press:', id)
 
-  if (light)
+  if (light){
+    if (res === 1)
     Meteor.call('lightYellow', id, res )
+  }
 
   if (offset)
     TokDetails.update(divs._id , {$set: {[spot]: res
@@ -65,9 +67,16 @@ mousePress = (actionName, id, offset, light) => {
     TokDetails.update(divs._id , {$set: {[spot]: res }})
 }
 
-lightYellow = (pin, on) => {
+pinOn = (pin) => {
   if (_.isObject(Cylon)) {
-    return Cylon.robots['Light'].commands['switchStair'].call(Cylon.robots['Light'], pin, on)
+    return Cylon.robots['Light'].commands['switchStairOn'].call(Cylon.robots['Light'], pin)
+
+  }
+}
+
+pinOff = (pin) => {
+  if (_.isObject(Cylon)) {
+    return Cylon.robots['Light'].commands['switchStairOff'].call(Cylon.robots['Light'], pin)
 
   }
 }

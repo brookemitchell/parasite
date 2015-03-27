@@ -12,10 +12,6 @@ Template.subscribers.events({
   }
 })
 
-Template.subscribers.helpers({
-
-})
-
 var prev                        //needed as file global
 // the prettiest set of conditionals you'll ever see.
 // the heart of the conditional audio volume changes
