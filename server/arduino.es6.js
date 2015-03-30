@@ -9,17 +9,17 @@ Meteor.startup( function() {
       button0: { driver: 'button', pin: 0}
       , button1: { driver: 'button', pin: 1}
       , button2: { driver: 'button', pin: 2}
-      , button3: { driver: 'button', pin: 3}
-      , button4: { driver: 'button', pin: 4}
-      , button5: { driver: 'button', pin: 20}
-      , button6: { driver: 'button', pin: 21}
+      , button3: { driver: 'button', pin: 4}
+      , button4: { driver: 'button', pin: 20}
+      , button5: { driver: 'button', pin: 21}
+      // , button6: { driver: 'button', pin: 22}
       , stair0: { driver: 'led', pin: 6 }
       , stair1: { driver: 'led', pin: 7 }
       , stair2: { driver: 'led', pin: 8 }
       , stair3: { driver: 'led', pin: 9 }
       , stair4: { driver: 'led', pin: 10 }
       , stair5: { driver: 'led', pin: 11 }
-      , stair6: { driver: 'led', pin: 12 }
+      // , stair6: { driver: 'led', pin: 12 }
     },
 
     switchStairOn: _.debounce(function(stair) {
@@ -46,7 +46,7 @@ Meteor.startup( function() {
       // not in cylon js sadly, yet
 
       //OFF
-      for( let i = 0 ; i < 7; i++ ) {
+      for( let i = 0 ; i < 6; i++ ) {
         my['button' + i].on('push', () => {
           this.switchStairOff(i, 0)
         })

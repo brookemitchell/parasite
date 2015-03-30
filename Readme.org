@@ -6,3 +6,10 @@
 
 ** To start:
 clone package. run: meteor
+
+** Add this to your cron jobs
+*** Executes the bash script at 0:01 am every morning. Set it more or less frequently if you like.
+    #+BEGIN_SRC bash
+     - 1 0 * * * . (Project Folder)/public/sounds/cmd.bash
+    #+END_SRC
+    - Don't forget to make it executable.

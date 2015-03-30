@@ -3,13 +3,13 @@ Template.hostAudio.rendered = function() {
     var AudioContext = window.AudioContext || window.webkitAudioContext
     var audioCtx = new AudioContext()
     var finish = audioCtx.destination
-    var sourceNodes = [,,,,,,]
+    var sourceNodes = [,,,,,]
     //need access over whole app
-    filterNodes = [,,,,,,]
-    delayNodes = [,,,,,,]
-    gainNodes = [,,,,,,]
+    filterNodes = [,,,,,]
+    delayNodes = [,,,,,]
+    gainNodes = [,,,,,]
     ;(function setUpAudioNodes () {
-      for (var i = 0 ; i < 7; i++){
+      for (var i = 0 ; i < 6; i++){
         //create buff sources & gain nodes
         sourceNodes[i] = audioCtx.createBufferSource()
 
@@ -63,6 +63,6 @@ Template.hostAudio.rendered = function() {
     loadSounds('sounds/4.wav', 3)
     loadSounds('sounds/5.wav', 4)
     loadSounds('sounds/6.wav', 5)
-    loadSounds('sounds/7.wav', 6)
+    // loadSounds('sounds/7.wav', 6)
   }
 }

@@ -3,6 +3,8 @@ Meteor.methods({
   createToken: createToken,
   endConnection: endConnection,
   // lightYellow: lightYellow,
+  pinOn: pinOn,
+  pinOff: pinOff,
   mousePress: mousePress,
   pickEmpty: pickEmpty,
   getSessionId: () => {return sessionId},

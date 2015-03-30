@@ -1,5 +1,0 @@
-* TODO [#A] Log stair activity, run sox script.
-* TODO [#B] Switch to Delay audio effect.
-* TODO [#B] Make run CDP function.
-* TODO [#C] Uncaught Error: Not permitted. Untrusted code may only remove documents by ID. [403]
-* TODO [#C] Add account login feature for 'host'

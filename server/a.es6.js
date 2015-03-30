@@ -1,5 +1,5 @@
-var secret = '330406bb207afa42e6e0f86c505ce3f0d7a575b1'
-apiKey = 45167732
+var secret = '5426df72cdf7f74f027eb0692c8b21b983087d39'
+apiKey = 45194182
 openTokClient = new OpenTokClient(apiKey,secret)
 sessionId = openTokClient.createSession({mediaMode: 'routed'})
 

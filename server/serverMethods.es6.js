@@ -57,7 +57,8 @@ mousePress = (actionName, id, offset, light) => {
 
   if (light){
     if (res === 1)
-    Meteor.call('lightYellow', id, res )
+      Meteor.call('pinOn', id )
+    else Meteor.call('pinOff', id )
   }
 
   if (offset)
